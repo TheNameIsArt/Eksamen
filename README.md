@@ -12,7 +12,7 @@ Logbog: 15/4
     - Lavet alle siderne i formbuilder om til at have en menu funktion i stedet for knapper. Har også skrevet lidt om programmet på README
   
   Mathias
-    -
+    - Jeg arbejder på at få analyse og roots metoderne til at fungere med GUI'en
 
 
 Programmet:
