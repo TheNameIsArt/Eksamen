@@ -9,10 +9,11 @@ Logbog: 14/4
 Logbog: 15/4
 
   Anya
-    - Lavet alle siderne i formbuilder om til at have en menu funktion i stedet for knapper
+    - Lavet alle siderne i formbuilder om til at have en menu funktion i stedet for knapper. Har også skrevet lidt om programmet på README
   
   Mathias
     -
+
 
 Programmet:
   
