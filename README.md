@@ -6,6 +6,14 @@ Logbog: 14/4
   Mathias
     - Jeg har arbejdet på grundstukturen (kodemæssigt) og implementeret en format metode i monotoniundersøgelses-framen til at analyserer       bruger inputs
 
+Logbog: 15/4
+
+  Anya
+    - Lavet alle siderne i formbuilder om til at have en menu funktion i stedet for knapper
+  
+  Mathias
+    -
+
 Programmet:
   
   Vores program skal kunne løse nogle forskellige matematiske funktioner. 
