@@ -1,6 +1,4 @@
-Logbog:
-
-14/4:
+Logbog: 14/4
   
   Anya 
     - Begyndt på at lave menu funktioner i formbuilder
@@ -9,6 +7,7 @@ Logbog:
     - Jeg har arbejdet på grundstukturen (kodemæssigt) og implementeret en format metode i monotoniundersøgelses-framen til at analyserer       bruger inputs
 
 Programmet:
+  
   Vores program skal kunne løse nogle forskellige matematiske funktioner. 
   Den skal bl.a kunne udregne differential og integrations funktioner. 
   - Inde under differentialregning skal man kunne få afledt sin funktion ved det rigtige metode og så kan man se beviset for tre-trins         reglen.
