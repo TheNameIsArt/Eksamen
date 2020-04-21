@@ -14,6 +14,9 @@ Logbog: 15/4
   Mathias
     - Jeg arbejder på at få analyse og roots metoderne til at fungere med GUI'en
 
+Logbog 21/4
+  Mathias
+    -Jeg arbejder på at programmet skal kunne anerkende eksponenter
 
 Programmet:
   
