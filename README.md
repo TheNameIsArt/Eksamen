@@ -1,26 +1,20 @@
 Logbog: 14/4
   
-  Anya 
-    - Begyndt på at lave menu funktioner i formbuilder
+  Anya - Begyndt på at lave menu funktioner i formbuilder
 
-  Mathias
-    - Jeg har arbejdet på grundstukturen (kodemæssigt) og implementeret en format metode i monotoniundersøgelses-framen til at analyserer       bruger inputs
+  Mathias - Jeg har arbejdet på grundstukturen (kodemæssigt) og implementeret en format metode i monotoniundersøgelses-framen til at analyserer       bruger inputs
 
 Logbog: 15/4
 
-  Anya
-    - Lavet alle siderne i formbuilder om til at have en menu funktion i stedet for knapper. Har også skrevet lidt om programmet på README
+  Anya - Lavet alle siderne i formbuilder om til at have en menu funktion i stedet for knapper. Har også skrevet lidt om programmet på README
   
-  Mathias
-    - Jeg arbejder på at få analyse og roots metoderne til at fungere med GUI'en
+  Mathias - Jeg arbejder på at få analyse og roots metoderne til at fungere med GUI'en
 
 Logbog: 21/4
  
-  Anya
-   - Arbejdet på synopsis
+  Anya - Arbejdet på synopsis
    
-  Mathias
-   - Jeg arbejder på at programmet skal kunne anerkende eksponenter
+  Mathias - Jeg arbejder på at programmet skal kunne anerkende eksponenter
 
 Programmet:
   
