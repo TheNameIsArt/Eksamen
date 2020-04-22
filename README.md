@@ -15,6 +15,10 @@ Logbog: 21/4
   Anya - Arbejdet på synopsis
    
   Mathias - Jeg arbejder på at programmet skal kunne anerkende eksponenter
+  
+Logbog 22/4
+
+  Mathias - Jeg har arbejdet videre på analyse methoden
 
 Programmet:
   
