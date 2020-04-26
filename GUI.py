@@ -17,11 +17,14 @@ import wx.xrc
 class MainFrame ( wx.Frame ):
 
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 741,462 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 741,462 ), style = wx.DEFAULT_FRAME_STYLE|wx.MAXIMIZE|wx.TAB_TRAVERSAL )
 
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 
 		vertical = wx.BoxSizer( wx.VERTICAL )
+
+
+		vertical.Add( ( 0, 30), 0, wx.EXPAND, 5 )
 
 		self.Main_Title = wx.StaticText( self, wx.ID_ANY, u"FUNKTIONSREGNEREN", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.Main_Title.Wrap( -1 )
@@ -56,37 +59,43 @@ class MainFrame ( wx.Frame ):
 		vertical.Add( self.Discription_txt3, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
 
 
-		vertical.Add( ( 0, 50), 0, wx.EXPAND|wx.TOP, 5 )
-
-		horizontal = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.mono_butt = wx.Button( self, wx.ID_ANY, u"Monotoni", wx.DefaultPosition, wx.DefaultSize, 0 )
-		horizontal.Add( self.mono_butt, 0, wx.ALL, 5 )
-
-		self.diff_butt = wx.Button( self, wx.ID_ANY, u"Differential", wx.DefaultPosition, wx.DefaultSize, 0 )
-		horizontal.Add( self.diff_butt, 0, wx.ALL, 5 )
-
-		self.inte_butt = wx.Button( self, wx.ID_ANY, u"Integration", wx.DefaultPosition, wx.DefaultSize, 0 )
-		horizontal.Add( self.inte_butt, 0, wx.ALL, 5 )
-
-
-		vertical.Add( horizontal, 0, wx.ALIGN_CENTER, 5 )
-
-
 		self.SetSizer( vertical )
 		self.Layout()
+		self.m_menubar2 = wx.MenuBar( 0 )
+		self.vælg_menu = wx.Menu()
+		self.mono_menuItem = wx.MenuItem( self.vælg_menu, wx.ID_ANY, u"Monotoni undersøgelse", wx.EmptyString, wx.ITEM_NORMAL )
+		self.vælg_menu.Append( self.mono_menuItem )
+
+		self.diff_menuItem = wx.MenuItem( self.vælg_menu, wx.ID_ANY, u"Differentialregning", wx.EmptyString, wx.ITEM_NORMAL )
+		self.vælg_menu.Append( self.diff_menuItem )
+
+		self.int_menuItem = wx.MenuItem( self.vælg_menu, wx.ID_ANY, u"Integrationsregning", wx.EmptyString, wx.ITEM_NORMAL )
+		self.vælg_menu.Append( self.int_menuItem )
+
+		self.m_menubar2.Append( self.vælg_menu, u"Vælg funktion" )
+
+		self.SetMenuBar( self.m_menubar2 )
+
 
 		self.Centre( wx.BOTH )
 
 		# Connect Events
-		self.mono_butt.Bind( wx.EVT_BUTTON, self.mono )
+		self.Bind( wx.EVT_MENU, self.vis_monoFrame, id = self.mono_menuItem.GetId() )
+		self.Bind( wx.EVT_MENU, self.vis_diffFrame, id = self.diff_menuItem.GetId() )
+		self.Bind( wx.EVT_MENU, self.vis_intFrame, id = self.int_menuItem.GetId() )
 
 	def __del__( self ):
 		pass
 
 
 	# Virtual event handlers, overide them in your derived class
-	def mono( self, event ):
+	def vis_monoFrame( self, event ):
+		event.Skip()
+
+	def vis_diffFrame( self, event ):
+		event.Skip()
+
+	def vis_intFrame( self, event ):
 		event.Skip()
 
 
@@ -103,6 +112,9 @@ class MonoFrame ( wx.Frame ):
 
 		vertical = wx.BoxSizer( wx.VERTICAL )
 
+
+		vertical.Add( ( 0, 30), 0, wx.EXPAND, 5 )
+
 		self.Mono_Title = wx.StaticText( self, wx.ID_ANY, u"MONOTONI UNDERSØGELSE", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.Mono_Title.Wrap( -1 )
 
@@ -115,96 +127,126 @@ class MonoFrame ( wx.Frame ):
 
 		vertical.Add( ( 0, 10), 0, wx.EXPAND, 5 )
 
-		grid = wx.GridSizer( 0, 2, 0, 0 )
+		bSizer71 = wx.BoxSizer( wx.HORIZONTAL )
 
-		vertical = wx.BoxSizer( wx.VERTICAL )
+		vertical1 = wx.BoxSizer( wx.VERTICAL )
 
 		self.indsæt_mono = wx.TextCtrl( self, wx.ID_ANY, u"Indsæt din funktion her", wx.DefaultPosition, wx.Size( 270,-1 ), 0 )
-		vertical.Add( self.indsæt_mono, 0, wx.ALL, 5 )
+		vertical1.Add( self.indsæt_mono, 0, wx.ALL, 5 )
 
 		self.afledte_mono = wx.StaticText( self, wx.ID_ANY, u"Afledte funktion:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.afledte_mono.Wrap( -1 )
 
-		vertical.Add( self.afledte_mono, 0, wx.ALIGN_CENTER|wx.ALL|wx.LEFT, 5 )
+		vertical1.Add( self.afledte_mono, 0, wx.ALIGN_CENTER|wx.ALL|wx.LEFT, 5 )
 
 		result_indsætChoices = []
 		self.result_indsæt = wx.ListBox( self, wx.ID_ANY, wx.DefaultPosition, wx.Size( 270,50 ), result_indsætChoices, 0 )
-		vertical.Add( self.result_indsæt, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
+		vertical1.Add( self.result_indsæt, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
 
 
-		grid.Add( vertical, 0, 0, 5 )
+		bSizer71.Add( vertical1, 0, 0, 5 )
 
-		vertical = wx.BoxSizer( wx.VERTICAL )
+		bSizer72 = wx.BoxSizer( wx.HORIZONTAL )
+
+
+		bSizer72.Add( ( 80, 0), 1, wx.EXPAND, 5 )
+
+		vertical2 = wx.BoxSizer( wx.VERTICAL )
 
 		self.rødder_txt = wx.StaticText( self, wx.ID_ANY, u"Rødderne:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.rødder_txt.Wrap( -1 )
 
-		vertical.Add( self.rødder_txt, 0, wx.ALL, 5 )
+		vertical2.Add( self.rødder_txt, 0, wx.ALL, 5 )
 
 		rødderChoices = []
 		self.rødder = wx.ListBox( self, wx.ID_ANY, wx.DefaultPosition, wx.Size( 255,100 ), rødderChoices, 0 )
-		vertical.Add( self.rødder, 0, wx.ALL, 5 )
+		vertical2.Add( self.rødder, 0, wx.ALL, 5 )
 
 
-		grid.Add( vertical, 0, 0, 5 )
+		bSizer72.Add( vertical2, 0, 0, 5 )
 
-		vertical = wx.BoxSizer( wx.VERTICAL )
+
+		bSizer71.Add( bSizer72, 0, wx.LEFT, 5 )
+
+
+		vertical.Add( bSizer71, 1, 0, 5 )
+
+		bSizer73 = wx.BoxSizer( wx.HORIZONTAL )
+
+		vertical3 = wx.BoxSizer( wx.VERTICAL )
 
 		self.vælg_txt = wx.StaticText( self, wx.ID_ANY, u"Vælg tal: f'(x)>0 og f'(x)<0", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.vælg_txt.Wrap( -1 )
 
-		vertical.Add( self.vælg_txt, 0, wx.ALL, 5 )
+		vertical3.Add( self.vælg_txt, 0, wx.ALL, 5 )
 
 		self.tal1 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		vertical.Add( self.tal1, 0, wx.ALL, 5 )
+		vertical3.Add( self.tal1, 0, wx.ALL, 5 )
 
 		self.tal2 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		vertical.Add( self.tal2, 0, wx.ALL, 5 )
+		vertical3.Add( self.tal2, 0, wx.ALL, 5 )
 
 		self.tal3 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		vertical.Add( self.tal3, 0, wx.ALL, 5 )
+		vertical3.Add( self.tal3, 0, wx.ALL, 5 )
 
 
-		grid.Add( vertical, 1, wx.EXPAND, 5 )
+		bSizer73.Add( vertical3, 1, wx.EXPAND, 5 )
 
-		vertical = wx.BoxSizer( wx.VERTICAL )
+		bSizer74 = wx.BoxSizer( wx.VERTICAL )
+
+		vertical4 = wx.BoxSizer( wx.VERTICAL )
 
 		self.result_tal = wx.StaticText( self, wx.ID_ANY, u"Resultat:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.result_tal.Wrap( -1 )
 
-		vertical.Add( self.result_tal, 0, wx.ALL, 5 )
+		vertical4.Add( self.result_tal, 0, wx.ALL, 5 )
 
 		self.m_textCtrl11 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		vertical.Add( self.m_textCtrl11, 0, wx.ALL, 5 )
+		vertical4.Add( self.m_textCtrl11, 0, wx.ALL, 5 )
 
 		self.m_textCtrl12 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		vertical.Add( self.m_textCtrl12, 0, wx.ALL, 5 )
+		vertical4.Add( self.m_textCtrl12, 0, wx.ALL, 5 )
 
 		self.m_textCtrl13 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		vertical.Add( self.m_textCtrl13, 0, wx.ALL, 5 )
+		vertical4.Add( self.m_textCtrl13, 0, wx.ALL, 5 )
 
 
-		grid.Add( vertical, 1, wx.EXPAND, 5 )
+		bSizer74.Add( vertical4, 1, wx.EXPAND, 5 )
 
 
-		vertical.Add( grid, 1, wx.EXPAND, 5 )
-
-		bSizer43 = wx.BoxSizer( wx.VERTICAL )
-
-		self.forside_butt = wx.Button( self, wx.ID_ANY, u"Forside", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer43.Add( self.forside_butt, 0, wx.ALL, 5 )
+		bSizer73.Add( bSizer74, 1, wx.EXPAND, 5 )
 
 
-		vertical.Add( bSizer43, 0, wx.EXPAND, 5 )
+		vertical.Add( bSizer73, 1, wx.EXPAND, 5 )
+
+		self.m_button7 = wx.Button( self, wx.ID_ANY, u"Udregn", wx.DefaultPosition, wx.DefaultSize, 0 )
+		vertical.Add( self.m_button7, 0, wx.ALL, 5 )
 
 
 		self.SetSizer( vertical )
 		self.Layout()
+		self.m_menubar5 = wx.MenuBar( 0 )
+		self.mono_menu = wx.Menu()
+		self.forside_menuItem = wx.MenuItem( self.mono_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
+		self.mono_menu.Append( self.forside_menuItem )
+
+		self.m_menubar5.Append( self.mono_menu, u"Vælg funktion" )
+
+		self.SetMenuBar( self.m_menubar5 )
+
 
 		self.Centre( wx.BOTH )
 
+		# Connect Events
+		self.m_button7.Bind( wx.EVT_BUTTON, self.Udregn )
+
 	def __del__( self ):
 		pass
+
+
+	# Virtual event handlers, overide them in your derived class
+	def Udregn( self, event ):
+		event.Skip()
 
 
 ###########################################################################
@@ -219,6 +261,9 @@ class DiffFrame ( wx.Frame ):
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 
 		vertical = wx.BoxSizer( wx.VERTICAL )
+
+
+		vertical.Add( ( 0, 30), 0, wx.EXPAND, 5 )
 
 		self.Diff_Title = wx.StaticText( self, wx.ID_ANY, u"DIFFERENTIALREGNING", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.Diff_Title.Wrap( -1 )
@@ -250,31 +295,24 @@ class DiffFrame ( wx.Frame ):
 
 		vertical.Add( bSizer21, 0, wx.ALIGN_CENTER, 5 )
 
-		horizontal = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.afled_butt = wx.Button( self, wx.ID_ANY, u"Afled din funktion", wx.DefaultPosition, wx.DefaultSize, 0 )
-		horizontal.Add( self.afled_butt, 0, wx.ALL, 5 )
-
-		self.tretrin_butt = wx.Button( self, wx.ID_ANY, u"Tre-trins reglen", wx.DefaultPosition, wx.DefaultSize, 0 )
-		horizontal.Add( self.tretrin_butt, 0, wx.ALL, 5 )
-
-
-		vertical.Add( horizontal, 0, wx.ALIGN_CENTER, 5 )
-
-		bSizer44 = wx.BoxSizer( wx.VERTICAL )
-
-
-		bSizer44.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		self.forside_butt = wx.Button( self, wx.ID_ANY, u"Forside", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer44.Add( self.forside_butt, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		vertical.Add( bSizer44, 0, wx.EXPAND, 5 )
-
 
 		self.SetSizer( vertical )
 		self.Layout()
+		self.m_menubar3 = wx.MenuBar( 0 )
+		self.afledDiff_menu = wx.Menu()
+		self.afledDiff_menuItem = wx.MenuItem( self.afledDiff_menu, wx.ID_ANY, u"Afled din funktion", wx.EmptyString, wx.ITEM_NORMAL )
+		self.afledDiff_menu.Append( self.afledDiff_menuItem )
+
+		self.tretrins_menuItem = wx.MenuItem( self.afledDiff_menu, wx.ID_ANY, u"Tre-trins reglen", wx.EmptyString, wx.ITEM_NORMAL )
+		self.afledDiff_menu.Append( self.tretrins_menuItem )
+
+		self.forside_menuItem = wx.MenuItem( self.afledDiff_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
+		self.afledDiff_menu.Append( self.forside_menuItem )
+
+		self.m_menubar3.Append( self.afledDiff_menu, u"Vælg funktion" )
+
+		self.SetMenuBar( self.m_menubar3 )
+
 
 		self.Centre( wx.BOTH )
 
@@ -341,20 +379,18 @@ class AfledDiffFrame ( wx.Frame ):
 
 		vertical1.Add( vertical, 0, wx.ALIGN_CENTER, 5 )
 
-		bSizer74 = wx.BoxSizer( wx.VERTICAL )
-
-
-		bSizer74.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		self.forside_butt = wx.Button( self, wx.ID_ANY, u"Forside", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer74.Add( self.forside_butt, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		vertical1.Add( bSizer74, 1, wx.EXPAND, 5 )
-
 
 		self.SetSizer( vertical1 )
 		self.Layout()
+		self.m_menubar5 = wx.MenuBar( 0 )
+		self.afledDiff_menu = wx.Menu()
+		self.forside_menuItem = wx.MenuItem( self.afledDiff_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
+		self.afledDiff_menu.Append( self.forside_menuItem )
+
+		self.m_menubar5.Append( self.afledDiff_menu, u"Vælg funktion" )
+
+		self.SetMenuBar( self.m_menubar5 )
+
 
 		self.Centre( wx.BOTH )
 
@@ -374,6 +410,9 @@ class TretrinFrame ( wx.Frame ):
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 
 		bSizer18 = wx.BoxSizer( wx.VERTICAL )
+
+
+		bSizer18.Add( ( 0, 30), 0, wx.EXPAND, 5 )
 
 		self.Tretrin_Title = wx.StaticText( self, wx.ID_ANY, u"TRE-TRINS REGLEN", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.Tretrin_Title.Wrap( -1 )
@@ -405,34 +444,27 @@ class TretrinFrame ( wx.Frame ):
 
 		bSizer18.Add( bSizer59, 0, wx.EXPAND, 5 )
 
-		horizontal = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.t1_butt = wx.Button( self, wx.ID_ANY, u"TRIN 1", wx.DefaultPosition, wx.DefaultSize, 0 )
-		horizontal.Add( self.t1_butt, 0, wx.ALL, 5 )
-
-		self.t2_butt = wx.Button( self, wx.ID_ANY, u"TRIN 2", wx.DefaultPosition, wx.DefaultSize, 0 )
-		horizontal.Add( self.t2_butt, 0, wx.ALL, 5 )
-
-		self.t3_butt = wx.Button( self, wx.ID_ANY, u"TRIN 3", wx.DefaultPosition, wx.DefaultSize, 0 )
-		horizontal.Add( self.t3_butt, 0, wx.ALL, 5 )
-
-
-		bSizer18.Add( horizontal, 0, wx.ALIGN_CENTER, 5 )
-
-		bSizer76 = wx.BoxSizer( wx.VERTICAL )
-
-
-		bSizer76.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		self.forside_butt = wx.Button( self, wx.ID_ANY, u"Forside", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer76.Add( self.forside_butt, 0, wx.ALL, 5 )
-
-
-		bSizer18.Add( bSizer76, 1, wx.ALIGN_CENTER, 5 )
-
 
 		self.SetSizer( bSizer18 )
 		self.Layout()
+		self.m_menubar17 = wx.MenuBar( 0 )
+		self.tretrin_menu = wx.Menu()
+		self.t1_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 1", wx.EmptyString, wx.ITEM_NORMAL )
+		self.tretrin_menu.Append( self.t1_menuItem )
+
+		self.t2_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 2", wx.EmptyString, wx.ITEM_NORMAL )
+		self.tretrin_menu.Append( self.t2_menuItem )
+
+		self.t3_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 3", wx.EmptyString, wx.ITEM_NORMAL )
+		self.tretrin_menu.Append( self.t3_menuItem )
+
+		self.forside_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
+		self.tretrin_menu.Append( self.forside_menuItem )
+
+		self.m_menubar17.Append( self.tretrin_menu, u"Vælg funktion" )
+
+		self.SetMenuBar( self.m_menubar17 )
+
 
 		self.Centre( wx.BOTH )
 
@@ -452,6 +484,9 @@ class Trin1Frame ( wx.Frame ):
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 
 		horizontal = wx.BoxSizer( wx.VERTICAL )
+
+
+		horizontal.Add( ( 0, 30), 0, wx.EXPAND, 5 )
 
 		self.Tretrin_Title = wx.StaticText( self, wx.ID_ANY, u"TRE-TRINS REGLEN", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.Tretrin_Title.Wrap( -1 )
@@ -541,20 +576,27 @@ class Trin1Frame ( wx.Frame ):
 
 		horizontal.Add( bSizer241, 0, wx.EXPAND, 5 )
 
-		bSizer25 = wx.BoxSizer( wx.VERTICAL )
-
-
-		bSizer25.Add( ( 0, 20), 0, wx.EXPAND, 5 )
-
-		self.m_button10 = wx.Button( self, wx.ID_ANY, u"TRIN 2", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer25.Add( self.m_button10, 0, wx.ALL, 5 )
-
-
-		horizontal.Add( bSizer25, 1, wx.EXPAND, 5 )
-
 
 		self.SetSizer( horizontal )
 		self.Layout()
+		self.m_menubar17 = wx.MenuBar( 0 )
+		self.tretrin_menu = wx.Menu()
+		self.t1_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 1", wx.EmptyString, wx.ITEM_NORMAL )
+		self.tretrin_menu.Append( self.t1_menuItem )
+
+		self.t2_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 2", wx.EmptyString, wx.ITEM_NORMAL )
+		self.tretrin_menu.Append( self.t2_menuItem )
+
+		self.t3_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 3", wx.EmptyString, wx.ITEM_NORMAL )
+		self.tretrin_menu.Append( self.t3_menuItem )
+
+		self.forside_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
+		self.tretrin_menu.Append( self.forside_menuItem )
+
+		self.m_menubar17.Append( self.tretrin_menu, u"Vælg funktion" )
+
+		self.SetMenuBar( self.m_menubar17 )
+
 
 		self.Centre( wx.BOTH )
 
@@ -574,6 +616,9 @@ class Trin2Frame ( wx.Frame ):
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 
 		bSizer26 = wx.BoxSizer( wx.VERTICAL )
+
+
+		bSizer26.Add( ( 0, 30), 0, wx.EXPAND, 5 )
 
 		self.Tretrin_Title = wx.StaticText( self, wx.ID_ANY, u"TRE-TRINS REGLEN", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.Tretrin_Title.Wrap( -1 )
@@ -661,20 +706,27 @@ class Trin2Frame ( wx.Frame ):
 
 		bSizer26.Add( bSizer32, 0, wx.EXPAND, 5 )
 
-		bSizer35 = wx.BoxSizer( wx.VERTICAL )
-
-
-		bSizer35.Add( ( 0, 20), 1, wx.EXPAND, 5 )
-
-		self.m_button11 = wx.Button( self, wx.ID_ANY, u"TRIN 3", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer35.Add( self.m_button11, 0, wx.ALL, 5 )
-
-
-		bSizer26.Add( bSizer35, 0, wx.EXPAND, 5 )
-
 
 		self.SetSizer( bSizer26 )
 		self.Layout()
+		self.m_menubar17 = wx.MenuBar( 0 )
+		self.tretrin_menu = wx.Menu()
+		self.t1_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 1", wx.EmptyString, wx.ITEM_NORMAL )
+		self.tretrin_menu.Append( self.t1_menuItem )
+
+		self.t2_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 2", wx.EmptyString, wx.ITEM_NORMAL )
+		self.tretrin_menu.Append( self.t2_menuItem )
+
+		self.t3_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 3", wx.EmptyString, wx.ITEM_NORMAL )
+		self.tretrin_menu.Append( self.t3_menuItem )
+
+		self.forside_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
+		self.tretrin_menu.Append( self.forside_menuItem )
+
+		self.m_menubar17.Append( self.tretrin_menu, u"Vælg funktion" )
+
+		self.SetMenuBar( self.m_menubar17 )
+
 
 		self.Centre( wx.BOTH )
 
@@ -694,6 +746,9 @@ class Trin3Frame ( wx.Frame ):
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 
 		bSizer33 = wx.BoxSizer( wx.VERTICAL )
+
+
+		bSizer33.Add( ( 0, 30), 0, wx.EXPAND, 5 )
 
 		self.Tretrin_Title = wx.StaticText( self, wx.ID_ANY, u"TRE-TRINS REGLEN", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.Tretrin_Title.Wrap( -1 )
@@ -763,17 +818,27 @@ class Trin3Frame ( wx.Frame ):
 
 		bSizer33.Add( bSizer391, 1, wx.EXPAND, 5 )
 
-		bSizer75 = wx.BoxSizer( wx.VERTICAL )
-
-		self.forside_butt = wx.Button( self, wx.ID_ANY, u"Forside", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer75.Add( self.forside_butt, 0, wx.ALL, 5 )
-
-
-		bSizer33.Add( bSizer75, 1, wx.EXPAND, 5 )
-
 
 		self.SetSizer( bSizer33 )
 		self.Layout()
+		self.m_menubar17 = wx.MenuBar( 0 )
+		self.tretrin_menu = wx.Menu()
+		self.t1_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 1", wx.EmptyString, wx.ITEM_NORMAL )
+		self.tretrin_menu.Append( self.t1_menuItem )
+
+		self.t2_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 2", wx.EmptyString, wx.ITEM_NORMAL )
+		self.tretrin_menu.Append( self.t2_menuItem )
+
+		self.t3_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 3", wx.EmptyString, wx.ITEM_NORMAL )
+		self.tretrin_menu.Append( self.t3_menuItem )
+
+		self.forside_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
+		self.tretrin_menu.Append( self.forside_menuItem )
+
+		self.m_menubar17.Append( self.tretrin_menu, u"Vælg funktion" )
+
+		self.SetMenuBar( self.m_menubar17 )
+
 
 		self.Centre( wx.BOTH )
 
@@ -794,6 +859,9 @@ class IntFrame ( wx.Frame ):
 
 		vertical = wx.BoxSizer( wx.VERTICAL )
 
+
+		vertical.Add( ( 0, 30), 0, wx.EXPAND, 5 )
+
 		self.Inte_Title = wx.StaticText( self, wx.ID_ANY, u"INTEGRATIONSREGNING", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.Inte_Title.Wrap( -1 )
 
@@ -813,7 +881,7 @@ class IntFrame ( wx.Frame ):
 
 		bSizer21.Add( self.m_staticText34, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
 
-		self.m_staticText35 = wx.StaticText( self, wx.ID_ANY, u"hjælp af kædereglen og få beregner integration ved substitution", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText35 = wx.StaticText( self, wx.ID_ANY, u"hjælp af kædereglen og få beregnet integration ved substitution", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText35.Wrap( -1 )
 
 		bSizer21.Add( self.m_staticText35, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
@@ -824,47 +892,30 @@ class IntFrame ( wx.Frame ):
 
 		vertical.Add( bSizer21, 0, wx.EXPAND, 5 )
 
-		bSizer53 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_button15 = wx.Button( self, wx.ID_ANY, u"Afled din funktion", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer53.Add( self.m_button15, 0, wx.ALL, 5 )
-
-		self.m_button16 = wx.Button( self, wx.ID_ANY, u"Kædereglen", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer53.Add( self.m_button16, 0, wx.ALL, 5 )
-
-
-		vertical.Add( bSizer53, 0, wx.ALIGN_CENTER, 5 )
-
-		bSizer58 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_button17 = wx.Button( self, wx.ID_ANY, u"Integration ved substitution (ubestemt integral)", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer58.Add( self.m_button17, 0, wx.ALL, 5 )
-
-
-		vertical.Add( bSizer58, 0, wx.ALIGN_CENTER, 5 )
-
-		bSizer78 = wx.BoxSizer( wx.VERTICAL )
-
-		self.m_button171 = wx.Button( self, wx.ID_ANY, u"Integration ved substitution (bestemt integral)", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer78.Add( self.m_button171, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		vertical.Add( bSizer78, 1, wx.EXPAND, 5 )
-
-		bSizer77 = wx.BoxSizer( wx.VERTICAL )
-
-
-		bSizer77.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		self.forside_butt = wx.Button( self, wx.ID_ANY, u"Forside", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer77.Add( self.forside_butt, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		vertical.Add( bSizer77, 1, wx.EXPAND, 5 )
-
 
 		self.SetSizer( vertical )
 		self.Layout()
+		self.m_menubar17 = wx.MenuBar( 0 )
+		self.int_menu = wx.Menu()
+		self.afledInt_menuItem = wx.MenuItem( self.int_menu, wx.ID_ANY, u"Afled din funktion", wx.EmptyString, wx.ITEM_NORMAL )
+		self.int_menu.Append( self.afledInt_menuItem )
+
+		self.kæde_menuItem = wx.MenuItem( self.int_menu, wx.ID_ANY, u"Kædereglen", wx.EmptyString, wx.ITEM_NORMAL )
+		self.int_menu.Append( self.kæde_menuItem )
+
+		self.subUb_menuItem = wx.MenuItem( self.int_menu, wx.ID_ANY, u"Integration ved subtitution (ubestemt integral)", wx.EmptyString, wx.ITEM_NORMAL )
+		self.int_menu.Append( self.subUb_menuItem )
+
+		self.subB_menuItem = wx.MenuItem( self.int_menu, wx.ID_ANY, u"Integration ved substitution (bestemt integral)", wx.EmptyString, wx.ITEM_NORMAL )
+		self.int_menu.Append( self.subB_menuItem )
+
+		self.forside_menuItem = wx.MenuItem( self.int_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
+		self.int_menu.Append( self.forside_menuItem )
+
+		self.m_menubar17.Append( self.int_menu, u"Vælg funktion" )
+
+		self.SetMenuBar( self.m_menubar17 )
+
 
 		self.Centre( wx.BOTH )
 
@@ -922,7 +973,7 @@ class AfledIntFrame ( wx.Frame ):
 		self.okjinhuj80unih = wx.StaticText( self, wx.ID_ANY, u"Din afledte funktion er:", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.okjinhuj80unih.Wrap( -1 )
 
-		vertical.Add( self.okjinhuj80unih, 0, wx.ALL, 5 )
+		vertical.Add( self.okjinhuj80unih, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
 
 		resultatIntChoices = []
 		self.resultatInt = wx.ListBox( self, wx.ID_ANY, wx.DefaultPosition, wx.Size( 270,50 ), resultatIntChoices, 0 )
@@ -934,17 +985,20 @@ class AfledIntFrame ( wx.Frame ):
 		bSizer74 = wx.BoxSizer( wx.VERTICAL )
 
 
-		bSizer74.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		self.forside_butt = wx.Button( self, wx.ID_ANY, u"Forside", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer74.Add( self.forside_butt, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
 		vertical1.Add( bSizer74, 1, wx.EXPAND, 5 )
 
 
 		self.SetSizer( vertical1 )
 		self.Layout()
+		self.m_menubar5 = wx.MenuBar( 0 )
+		self.afledInt_menu = wx.Menu()
+		self.forside_menuItem = wx.MenuItem( self.afledInt_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
+		self.afledInt_menu.Append( self.forside_menuItem )
+
+		self.m_menubar5.Append( self.afledInt_menu, u"Vælg funktion" )
+
+		self.SetMenuBar( self.m_menubar5 )
+
 
 		self.Centre( wx.BOTH )
 
@@ -1052,17 +1106,20 @@ class KædeFrame ( wx.Frame ):
 		bSizer73 = wx.BoxSizer( wx.VERTICAL )
 
 
-		bSizer73.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		self.forside_butt = wx.Button( self, wx.ID_ANY, u"Forside", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer73.Add( self.forside_butt, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
 		bSizer66.Add( bSizer73, 0, wx.EXPAND, 5 )
 
 
 		self.SetSizer( bSizer66 )
 		self.Layout()
+		self.m_menubar5 = wx.MenuBar( 0 )
+		self.kæde_menu = wx.Menu()
+		self.forside_menuItem = wx.MenuItem( self.kæde_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
+		self.kæde_menu.Append( self.forside_menuItem )
+
+		self.m_menubar5.Append( self.kæde_menu, u"Vælg funktion" )
+
+		self.SetMenuBar( self.m_menubar5 )
+
 
 		self.Centre( wx.BOTH )
 
@@ -1168,17 +1225,20 @@ class SubUbFrame ( wx.Frame ):
 		bSizer74 = wx.BoxSizer( wx.VERTICAL )
 
 
-		bSizer74.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		self.forside_butt = wx.Button( self, wx.ID_ANY, u"Forside", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer74.Add( self.forside_butt, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
 		bSizer79.Add( bSizer74, 1, wx.EXPAND, 5 )
 
 
 		self.SetSizer( bSizer79 )
 		self.Layout()
+		self.m_menubar5 = wx.MenuBar( 0 )
+		self.subUb_menu = wx.Menu()
+		self.forside_menuItem = wx.MenuItem( self.subUb_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
+		self.subUb_menu.Append( self.forside_menuItem )
+
+		self.m_menubar5.Append( self.subUb_menu, u"Vælg funktion" )
+
+		self.SetMenuBar( self.m_menubar5 )
+
 
 		self.Centre( wx.BOTH )
 
@@ -1308,21 +1368,81 @@ class SubBFrame ( wx.Frame ):
 		bSizer74 = wx.BoxSizer( wx.VERTICAL )
 
 
-		bSizer74.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		self.forside_butt = wx.Button( self, wx.ID_ANY, u"Forside", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer74.Add( self.forside_butt, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
 		bSizer79.Add( bSizer74, 1, wx.EXPAND, 5 )
 
 
 		self.SetSizer( bSizer79 )
 		self.Layout()
+		self.m_menubar5 = wx.MenuBar( 0 )
+		self.subB_menu = wx.Menu()
+		self.forside_menuItem = wx.MenuItem( self.subB_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
+		self.subB_menu.Append( self.forside_menuItem )
+
+		self.m_menubar5.Append( self.subB_menu, u"Vælg funktion" )
+
+		self.SetMenuBar( self.m_menubar5 )
+
 
 		self.Centre( wx.BOTH )
 
 	def __del__( self ):
 		pass
+
+
+###########################################################################
+## Class FejlFrame
+###########################################################################
+
+class FejlFrame ( wx.Dialog ):
+
+	def __init__( self, parent ):
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE )
+
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+
+		bSizer61 = wx.BoxSizer( wx.HORIZONTAL )
+
+
+		bSizer61.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		bSizer62 = wx.BoxSizer( wx.VERTICAL )
+
+
+		bSizer62.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.m_staticText69 = wx.StaticText( self, wx.ID_ANY, u"Error 404", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText69.Wrap( -1 )
+
+		bSizer62.Add( self.m_staticText69, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
+
+		self.m_button2 = wx.Button( self, wx.ID_ANY, u"Okay", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer62.Add( self.m_button2, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
+
+
+		bSizer62.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		bSizer61.Add( bSizer62, 1, wx.EXPAND, 5 )
+
+
+		bSizer61.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		self.SetSizer( bSizer61 )
+		self.Layout()
+		bSizer61.Fit( self )
+
+		self.Centre( wx.BOTH )
+
+		# Connect Events
+		self.m_button2.Bind( wx.EVT_BUTTON, self.forside )
+
+	def __del__( self ):
+		pass
+
+
+	# Virtual event handlers, overide them in your derived class
+	def forside( self, event ):
+		event.Skip()
 
 
