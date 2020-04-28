@@ -19,6 +19,10 @@ Logbog: 21/4
 Logbog 22/4
 
   Mathias - Jeg har arbejdet videre på analyse methoden
+ 
+Logbog 24/4
+
+  Mathias - Jeg fik lavet differentier methoden færdig
 
 Programmet:
   
