@@ -10,7 +10,7 @@ class MonoFrame(GUI.MonoFrame):
         self.fejlframe = FejlFrame(self)
 
     def Udregn( self, event ):
-        self.integration()
+        self.differentier()
 
     def Afslut( self, event ):
         pass
@@ -19,8 +19,8 @@ class MonoFrame(GUI.MonoFrame):
 
     def Analyse(self):
         try:
-            #val = self.indsæt_mono.GetValue()
-            val = "23x^4-e^x+365x-32+x"
+            val = self.indsæt_mono.GetValue()
+            #val = "23x^4-e^x+x+5/x+sqrt(32)+lg(60)"
             if val[0] == "y" and val[1] == "=":
                 val = val[2:]
 
@@ -50,7 +50,7 @@ class MonoFrame(GUI.MonoFrame):
         result = ""
 
         for i in range(0, len(val[1])):
-
+            pass
 
         #print(result)
 
@@ -82,33 +82,50 @@ class MonoFrame(GUI.MonoFrame):
         for i in range(0, len(val[1])):
             forskrift = val[1][i]
 
-
-            if "^" in val[0][i] and val[0][i][:1] != "e": #Eksponential-led
-                x = int(val[2][i+i])
-                n = int(val[2][i+i+1])
-                if n != 2:
-                    result += forskrift + str(n * x) + "x^" + str(n - 1)
-                else:
-                    result += forskrift + str(n * x) + "x"
-                if MainFrame.debug: print("Debug | Eksponent: i = " + str(i) + ", x = " + str(x) + ", n = " + str(n) + ", Forskrift: " + forskrift)
-
-            elif val[0][i][:-1].isdigit() and val[0][i][-1:] == "x": #Førstegrads-led
+            if val[0][i][:-1].isdigit() and val[0][i][-1:] == "x": #Førstegrads-led
                 k = val[0][i][:-1]
                 result += forskrift + k
                 if MainFrame.debug: print("Debug | Førstegrad: i = " + str(i) + ", k = " + str(k) + ", Forskrift: " + forskrift)
 
             elif val[0][i][:1] == "e" and val[0][i][-1:] == "x": #Euler-led
                 x = "e^x"
+                val[2].insert(0, "ekstra")
                 result += forskrift + x
-                if MainFrame.debug: print("Debug | Euler: i = " + str(i), ", x = " + x)
+                if MainFrame.debug: print("Debug | Euler: i = " + str(i) + ", x = " + x + " Forskrift: " + forskrift)
 
             elif val[0][i] == "x": #X-led
                 x = "1"
+                val[2].insert(0, "ekstra")
                 result += forskrift + x
-                if MainFrame.debug: print("Debug | X: i =" + str(i) + ", x = " + str(x) + "Forskrift: " + forskrift)
+                if MainFrame.debug: print("Debug | X-led: i = " + str(i) + ", x = " + str(x) + " Forskrift: " + forskrift)
+
+            elif "^" in val[0][i] and val[0][i][:1] != "e": #Eksponential-led
+                x = int(val[2][i+i])
+                n = int(val[2][i+i+1])
+                val[2].remove(str(n))
+                if n != 2:
+                    result += forskrift + str(n * x) + "x^" + str(n - 1)
+                else:
+                    result += forskrift + str(n * x) + "x"
+                if MainFrame.debug: print("Debug | Eksponent: i = " + str(i) + ", x = " + str(x) + ", n = " + str(n) + ", Forskrift: " + forskrift)
+
+            elif "/" in val[0][i]: #Divisions-led
+                x = val[2][i]
+                result += "-1/"+ x+"^2"
+                if MainFrame.debug: print("Debug | Division: i = " + str(i) + ", x = " + str(x) + ", Forskrift: " + forskrift)
+
+            if "sqrt" in val[0][i]: #Kvadratrodsled
+                x = val[2][i]
+                result += forskrift + "1/√" + x
+                if MainFrame.debug: print("Debug | Kvadratrod: i = " + str(i) + ", x = " + str(x) + ", Forskrift " + forskrift)
+
+            if "lg" in val[0][i] or "log" in val[0][i]: #Logoritmeled
+                x = val[2][i]
+                result += forskrift + "1/" + x
+                if MainFrame.debug: print("Debug | Logoritmeled: i = " + str(i) + ", x = " + str(x) + ", Forskrift " + forskrift)
 
         print("Resultat: " + result)
-
+        self.result_indsæt.Append(result)
 
     def afslut(self, event):
         self.Hide()
