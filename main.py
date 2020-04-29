@@ -79,7 +79,7 @@ class MonoFrame(GUI.MonoFrame):
     def differentier(self):
         val = self.Analyse()
         result = ""
-        for i in range(0, len(val[1])):
+        for i in range(0, len(val[0])):
             forskrift = val[1][i]
 
             if val[0][i][:-1].isdigit() and val[0][i][-1:] == "x": #Førstegrads-led
@@ -100,8 +100,11 @@ class MonoFrame(GUI.MonoFrame):
                 if MainFrame.debug: print("Debug | X-led: i = " + str(i) + ", x = " + str(x) + " Forskrift: " + forskrift)
 
             elif "^" in val[0][i] and val[0][i][:1] != "e": #Eksponential-led
-                x = int(val[2][i+i])
-                n = int(val[2][i+i+1])
+                if val[0][i][0] == "x":
+                    val[2].insert(0, "1")
+
+                x = int(val[2][i])
+                n = int(val[2][i+1])
                 val[2].remove(str(n))
                 if n != 2:
                     result += forskrift + str(n * x) + "x^" + str(n - 1)
@@ -114,15 +117,20 @@ class MonoFrame(GUI.MonoFrame):
                 result += "-1/"+ x+"^2"
                 if MainFrame.debug: print("Debug | Division: i = " + str(i) + ", x = " + str(x) + ", Forskrift: " + forskrift)
 
-            if "sqrt" in val[0][i]: #Kvadratrodsled
+            elif "sqrt" in val[0][i]: #Kvadratrodsled
                 x = val[2][i]
                 result += forskrift + "1/√" + x
                 if MainFrame.debug: print("Debug | Kvadratrod: i = " + str(i) + ", x = " + str(x) + ", Forskrift " + forskrift)
 
-            if "lg" in val[0][i] or "log" in val[0][i]: #Logoritmeled
+            elif "lg" in val[0][i] or "log" in val[0][i]: #Logoritmeled
                 x = val[2][i]
                 result += forskrift + "1/" + x
                 if MainFrame.debug: print("Debug | Logoritmeled: i = " + str(i) + ", x = " + str(x) + ", Forskrift " + forskrift)
+
+
+        if result[:1] == "+":
+            result = result[1:]
+        result = "y=" + result
 
         print("Resultat: " + result)
         self.result_indsæt.Append(result)
