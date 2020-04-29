@@ -63,9 +63,6 @@ class MainFrame ( wx.Frame ):
 		self.Layout()
 		self.m_menubar2 = wx.MenuBar( 0 )
 		self.vælg_menu = wx.Menu()
-		self.mono_menuItem = wx.MenuItem( self.vælg_menu, wx.ID_ANY, u"Monotoni undersøgelse", wx.EmptyString, wx.ITEM_NORMAL )
-		self.vælg_menu.Append( self.mono_menuItem )
-
 		self.diff_menuItem = wx.MenuItem( self.vælg_menu, wx.ID_ANY, u"Differentialregning", wx.EmptyString, wx.ITEM_NORMAL )
 		self.vælg_menu.Append( self.diff_menuItem )
 
@@ -80,7 +77,6 @@ class MainFrame ( wx.Frame ):
 		self.Centre( wx.BOTH )
 
 		# Connect Events
-		self.Bind( wx.EVT_MENU, self.vis_monoFrame, id = self.mono_menuItem.GetId() )
 		self.Bind( wx.EVT_MENU, self.vis_diffFrame, id = self.diff_menuItem.GetId() )
 		self.Bind( wx.EVT_MENU, self.vis_intFrame, id = self.int_menuItem.GetId() )
 
@@ -89,9 +85,6 @@ class MainFrame ( wx.Frame ):
 
 
 	# Virtual event handlers, overide them in your derived class
-	def vis_monoFrame( self, event ):
-		event.Skip()
-
 	def vis_diffFrame( self, event ):
 		event.Skip()
 
@@ -100,10 +93,10 @@ class MainFrame ( wx.Frame ):
 
 
 ###########################################################################
-## Class MonoFrame
+## Class DiffFrame
 ###########################################################################
 
-class MonoFrame ( wx.Frame ):
+class DiffFrame ( wx.Frame ):
 
 	def __init__( self, parent ):
 		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 741,563 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
@@ -115,7 +108,7 @@ class MonoFrame ( wx.Frame ):
 
 		vertical.Add( ( 0, 30), 0, wx.EXPAND, 5 )
 
-		self.Mono_Title = wx.StaticText( self, wx.ID_ANY, u"MONOTONI UNDERSØGELSE", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.Mono_Title = wx.StaticText( self, wx.ID_ANY, u"DIFFERENTIALREGNING", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.Mono_Title.Wrap( -1 )
 
 		self.Mono_Title.SetFont( wx.Font( 14, wx.FONTFAMILY_ROMAN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, True, "Times New Roman" ) )
@@ -146,81 +139,14 @@ class MonoFrame ( wx.Frame ):
 
 		bSizer71.Add( vertical1, 0, 0, 5 )
 
-		bSizer72 = wx.BoxSizer( wx.HORIZONTAL )
-
-
-		bSizer72.Add( ( 80, 0), 1, wx.EXPAND, 5 )
-
-		vertical2 = wx.BoxSizer( wx.VERTICAL )
-
-		self.rødder_txt = wx.StaticText( self, wx.ID_ANY, u"Rødderne:", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.rødder_txt.Wrap( -1 )
-
-		vertical2.Add( self.rødder_txt, 0, wx.ALL, 5 )
-
-		rødderChoices = []
-		self.rødder = wx.ListBox( self, wx.ID_ANY, wx.DefaultPosition, wx.Size( 255,100 ), rødderChoices, 0 )
-		vertical2.Add( self.rødder, 0, wx.ALL, 5 )
-
-
-		bSizer72.Add( vertical2, 0, 0, 5 )
-
-
-		bSizer71.Add( bSizer72, 0, wx.LEFT, 5 )
-
 
 		vertical.Add( bSizer71, 1, 0, 5 )
 
-		bSizer73 = wx.BoxSizer( wx.HORIZONTAL )
-
-		vertical3 = wx.BoxSizer( wx.VERTICAL )
-
-		self.vælg_txt = wx.StaticText( self, wx.ID_ANY, u"Vælg tal: f'(x)>0 og f'(x)<0", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.vælg_txt.Wrap( -1 )
-
-		vertical3.Add( self.vælg_txt, 0, wx.ALL, 5 )
-
-		self.tal1 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		vertical3.Add( self.tal1, 0, wx.ALL, 5 )
-
-		self.tal2 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		vertical3.Add( self.tal2, 0, wx.ALL, 5 )
-
-		self.tal3 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		vertical3.Add( self.tal3, 0, wx.ALL, 5 )
-
-
-		bSizer73.Add( vertical3, 1, wx.EXPAND, 5 )
-
-		bSizer74 = wx.BoxSizer( wx.VERTICAL )
-
-		vertical4 = wx.BoxSizer( wx.VERTICAL )
-
-		self.result_tal = wx.StaticText( self, wx.ID_ANY, u"Resultat:", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.result_tal.Wrap( -1 )
-
-		vertical4.Add( self.result_tal, 0, wx.ALL, 5 )
-
-		self.m_textCtrl11 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		vertical4.Add( self.m_textCtrl11, 0, wx.ALL, 5 )
-
-		self.m_textCtrl12 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		vertical4.Add( self.m_textCtrl12, 0, wx.ALL, 5 )
-
-		self.m_textCtrl13 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		vertical4.Add( self.m_textCtrl13, 0, wx.ALL, 5 )
-
-
-		bSizer74.Add( vertical4, 1, wx.EXPAND, 5 )
-
-
-		bSizer73.Add( bSizer74, 1, wx.EXPAND, 5 )
-
-
-		vertical.Add( bSizer73, 1, wx.EXPAND, 5 )
-
 		self.m_button7 = wx.Button( self, wx.ID_ANY, u"Udregn", wx.DefaultPosition, wx.DefaultSize, 0 )
 		vertical.Add( self.m_button7, 0, wx.ALL, 5 )
+
+		self.m_button71 = wx.Button( self, wx.ID_ANY, u"3 Trins Reglen", wx.DefaultPosition, wx.DefaultSize, 0 )
+		vertical.Add( self.m_button71, 0, wx.ALL, 5 )
 
 
 		self.SetSizer( vertical )
@@ -238,612 +164,23 @@ class MonoFrame ( wx.Frame ):
 		self.Centre( wx.BOTH )
 
 		# Connect Events
-		self.m_button7.Bind( wx.EVT_BUTTON, self.Udregn )
+		self.m_button7.Bind( wx.EVT_BUTTON, self.udregn )
+		self.m_button71.Bind( wx.EVT_BUTTON, self.vis_tre_trin )
+		self.Bind( wx.EVT_MENU, self.vis_forside, id = self.forside_menuItem.GetId() )
 
 	def __del__( self ):
 		pass
 
 
 	# Virtual event handlers, overide them in your derived class
-	def Udregn( self, event ):
+	def udregn( self, event ):
 		event.Skip()
 
-
-###########################################################################
-## Class DiffFrame
-###########################################################################
-
-class DiffFrame ( wx.Frame ):
-
-	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 741,462 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
-
-		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
-
-		vertical = wx.BoxSizer( wx.VERTICAL )
-
-
-		vertical.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		self.Diff_Title = wx.StaticText( self, wx.ID_ANY, u"DIFFERENTIALREGNING", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.Diff_Title.Wrap( -1 )
-
-		self.Diff_Title.SetFont( wx.Font( 14, wx.FONTFAMILY_ROMAN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, True, "Times New Roman" ) )
-		self.Diff_Title.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNTEXT ) )
-		self.Diff_Title.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_APPWORKSPACE ) )
-
-		vertical.Add( self.Diff_Title, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		vertical.Add( ( 0, 20), 0, wx.EXPAND, 5 )
-
-		bSizer21 = wx.BoxSizer( wx.VERTICAL )
-
-		self.m_staticText34 = wx.StaticText( self, wx.ID_ANY, u"Her kan du få afledt din funktion, se beviset for tre-trin reglen", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText34.Wrap( -1 )
-
-		bSizer21.Add( self.m_staticText34, 0, wx.ALL, 5 )
-
-		self.m_staticText35 = wx.StaticText( self, wx.ID_ANY, u"og få udregnet differention af sum af 2 funktioner", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText35.Wrap( -1 )
-
-		bSizer21.Add( self.m_staticText35, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		bSizer21.Add( ( 0, 10), 0, wx.EXPAND, 5 )
-
-
-		vertical.Add( bSizer21, 0, wx.ALIGN_CENTER, 5 )
-
-
-		self.SetSizer( vertical )
-		self.Layout()
-		self.m_menubar3 = wx.MenuBar( 0 )
-		self.afledDiff_menu = wx.Menu()
-		self.afledDiff_menuItem = wx.MenuItem( self.afledDiff_menu, wx.ID_ANY, u"Afled din funktion", wx.EmptyString, wx.ITEM_NORMAL )
-		self.afledDiff_menu.Append( self.afledDiff_menuItem )
-
-		self.tretrins_menuItem = wx.MenuItem( self.afledDiff_menu, wx.ID_ANY, u"Tre-trins reglen", wx.EmptyString, wx.ITEM_NORMAL )
-		self.afledDiff_menu.Append( self.tretrins_menuItem )
-
-		self.forside_menuItem = wx.MenuItem( self.afledDiff_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
-		self.afledDiff_menu.Append( self.forside_menuItem )
-
-		self.m_menubar3.Append( self.afledDiff_menu, u"Vælg funktion" )
-
-		self.SetMenuBar( self.m_menubar3 )
-
-
-		self.Centre( wx.BOTH )
-
-	def __del__( self ):
-		pass
-
-
-###########################################################################
-## Class AfledDiffFrame
-###########################################################################
-
-class AfledDiffFrame ( wx.Frame ):
-
-	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 741,462 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
-
-		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
-
-		vertical1 = wx.BoxSizer( wx.VERTICAL )
-
-		self.AdledDiff_Title = wx.StaticText( self, wx.ID_ANY, u"AFLED DIN FUNKTION ", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.AdledDiff_Title.Wrap( -1 )
-
-		self.AdledDiff_Title.SetFont( wx.Font( 14, wx.FONTFAMILY_ROMAN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, True, "Times New Roman" ) )
-		self.AdledDiff_Title.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNTEXT ) )
-		self.AdledDiff_Title.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_APPWORKSPACE ) )
-
-		vertical1.Add( self.AdledDiff_Title, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-		self.AdledDiff_Title1 = wx.StaticText( self, wx.ID_ANY, u"(DIFFERENTION)", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.AdledDiff_Title1.Wrap( -1 )
-
-		self.AdledDiff_Title1.SetFont( wx.Font( 14, wx.FONTFAMILY_ROMAN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, True, "Times New Roman" ) )
-		self.AdledDiff_Title1.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNTEXT ) )
-		self.AdledDiff_Title1.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_APPWORKSPACE ) )
-
-		vertical1.Add( self.AdledDiff_Title1, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		vertical1.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		vertical2 = wx.BoxSizer( wx.VERTICAL )
-
-		self.indsætDiff = wx.TextCtrl( self, wx.ID_ANY, u"Indsæt din funktion her", wx.DefaultPosition, wx.Size( 270,-1 ), 0 )
-		vertical2.Add( self.indsætDiff, 0, wx.ALL, 5 )
-
-
-		vertical1.Add( vertical2, 0, wx.ALIGN_CENTER, 5 )
-
-		vertical = wx.BoxSizer( wx.VERTICAL )
-
-
-		vertical.Add( ( 0, 20), 0, wx.EXPAND, 5 )
-
-		self.ijuhbygh7u = wx.StaticText( self, wx.ID_ANY, u"Din afledte funktion er:", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.ijuhbygh7u.Wrap( -1 )
-
-		vertical.Add( self.ijuhbygh7u, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-		resultatDiffChoices = []
-		self.resultatDiff = wx.ListBox( self, wx.ID_ANY, wx.DefaultPosition, wx.Size( 270,50 ), resultatDiffChoices, 0 )
-		vertical.Add( self.resultatDiff, 0, wx.ALL, 5 )
-
-
-		vertical1.Add( vertical, 0, wx.ALIGN_CENTER, 5 )
-
-
-		self.SetSizer( vertical1 )
-		self.Layout()
-		self.m_menubar5 = wx.MenuBar( 0 )
-		self.afledDiff_menu = wx.Menu()
-		self.forside_menuItem = wx.MenuItem( self.afledDiff_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
-		self.afledDiff_menu.Append( self.forside_menuItem )
-
-		self.m_menubar5.Append( self.afledDiff_menu, u"Vælg funktion" )
-
-		self.SetMenuBar( self.m_menubar5 )
-
-
-		self.Centre( wx.BOTH )
-
-	def __del__( self ):
-		pass
-
-
-###########################################################################
-## Class TretrinFrame
-###########################################################################
-
-class TretrinFrame ( wx.Frame ):
-
-	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 741,462 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
-
-		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
-
-		bSizer18 = wx.BoxSizer( wx.VERTICAL )
-
-
-		bSizer18.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		self.Tretrin_Title = wx.StaticText( self, wx.ID_ANY, u"TRE-TRINS REGLEN", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.Tretrin_Title.Wrap( -1 )
-
-		self.Tretrin_Title.SetFont( wx.Font( 14, wx.FONTFAMILY_ROMAN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, True, "Times New Roman" ) )
-		self.Tretrin_Title.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNTEXT ) )
-		self.Tretrin_Title.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_APPWORKSPACE ) )
-
-		bSizer18.Add( self.Tretrin_Title, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		bSizer18.Add( ( 0, 20), 0, wx.EXPAND, 5 )
-
-		bSizer59 = wx.BoxSizer( wx.VERTICAL )
-
-		self.m_staticText80 = wx.StaticText( self, wx.ID_ANY, u"Tre-trins reglen er en metode for hvordan man differentierer ", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText80.Wrap( -1 )
-
-		bSizer59.Add( self.m_staticText80, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-		self.m_staticText81 = wx.StaticText( self, wx.ID_ANY, u"funktioner. Her kan du se beviset for det opdelt i de enkelte trin", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText81.Wrap( -1 )
-
-		bSizer59.Add( self.m_staticText81, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		bSizer59.Add( ( 0, 20), 0, wx.EXPAND, 5 )
-
-
-		bSizer18.Add( bSizer59, 0, wx.EXPAND, 5 )
-
-
-		self.SetSizer( bSizer18 )
-		self.Layout()
-		self.m_menubar17 = wx.MenuBar( 0 )
-		self.tretrin_menu = wx.Menu()
-		self.t1_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 1", wx.EmptyString, wx.ITEM_NORMAL )
-		self.tretrin_menu.Append( self.t1_menuItem )
-
-		self.t2_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 2", wx.EmptyString, wx.ITEM_NORMAL )
-		self.tretrin_menu.Append( self.t2_menuItem )
-
-		self.t3_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 3", wx.EmptyString, wx.ITEM_NORMAL )
-		self.tretrin_menu.Append( self.t3_menuItem )
-
-		self.forside_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
-		self.tretrin_menu.Append( self.forside_menuItem )
-
-		self.m_menubar17.Append( self.tretrin_menu, u"Vælg funktion" )
-
-		self.SetMenuBar( self.m_menubar17 )
-
-
-		self.Centre( wx.BOTH )
-
-	def __del__( self ):
-		pass
-
-
-###########################################################################
-## Class Trin1Frame
-###########################################################################
-
-class Trin1Frame ( wx.Frame ):
-
-	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 741,462 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
-
-		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
-
-		horizontal = wx.BoxSizer( wx.VERTICAL )
-
-
-		horizontal.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		self.Tretrin_Title = wx.StaticText( self, wx.ID_ANY, u"TRE-TRINS REGLEN", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.Tretrin_Title.Wrap( -1 )
-
-		self.Tretrin_Title.SetFont( wx.Font( 14, wx.FONTFAMILY_ROMAN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, True, "Times New Roman" ) )
-		self.Tretrin_Title.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNTEXT ) )
-		self.Tretrin_Title.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_APPWORKSPACE ) )
-
-		horizontal.Add( self.Tretrin_Title, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		horizontal.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		bSizer24 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.t1 = wx.StaticText( self, wx.ID_ANY, u"TRIN 1:", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.t1.Wrap( -1 )
-
-		self.t1.SetFont( wx.Font( 9, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Arial" ) )
-
-		bSizer24.Add( self.t1, 0, wx.ALL, 5 )
-
-
-		bSizer24.Add( ( 50, 0), 0, wx.EXPAND, 5 )
-
-		self.ko = wx.StaticText( self, wx.ID_ANY, u"f(x) = x^2", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.ko.Wrap( -1 )
-
-		bSizer24.Add( self.ko, 0, wx.ALL, 5 )
-
-
-		bSizer24.Add( ( 50, 0), 0, wx.EXPAND, 5 )
-
-		self.m_staticText37 = wx.StaticText( self, wx.ID_ANY, u"f'(x) = delta y / delta x", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText37.Wrap( -1 )
-
-		bSizer24.Add( self.m_staticText37, 0, wx.ALL, 5 )
-
-
-		horizontal.Add( bSizer24, 0, wx.EXPAND, 5 )
-
-		bSizer20 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText22 = wx.StaticText( self, wx.ID_ANY, u"f(x_0) = x_0^2", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText22.Wrap( -1 )
-
-		bSizer20.Add( self.m_staticText22, 0, wx.ALL, 5 )
-
-
-		bSizer20.Add( ( 50, 0), 0, wx.EXPAND, 5 )
-
-		self.m_staticText23 = wx.StaticText( self, wx.ID_ANY, u"f(x_0 + delta x) = (x_0 + delta x)", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText23.Wrap( -1 )
-
-		bSizer20.Add( self.m_staticText23, 0, wx.ALL, 5 )
-
-
-		horizontal.Add( bSizer20, 0, wx.EXPAND, 5 )
-
-		bSizer21 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText24 = wx.StaticText( self, wx.ID_ANY, u"Hældning = Differenskvotienten:", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText24.Wrap( -1 )
-
-		bSizer21.Add( self.m_staticText24, 0, wx.ALL, 5 )
-
-
-		horizontal.Add( bSizer21, 0, wx.EXPAND, 5 )
-
-		bSizer22 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText25 = wx.StaticText( self, wx.ID_ANY, u"delta f(x) / delta x = (f(x_0 + delta x) - f(x_0)) / delta x = ", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText25.Wrap( -1 )
-
-		bSizer22.Add( self.m_staticText25, 0, wx.ALL, 5 )
-
-
-		horizontal.Add( bSizer22, 0, wx.EXPAND, 5 )
-
-		bSizer241 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText28 = wx.StaticText( self, wx.ID_ANY, u"((x_0 + delta x)^2 -(x_0)^2) / delta x", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText28.Wrap( -1 )
-
-		bSizer241.Add( self.m_staticText28, 0, wx.ALL, 5 )
-
-
-		horizontal.Add( bSizer241, 0, wx.EXPAND, 5 )
-
-
-		self.SetSizer( horizontal )
-		self.Layout()
-		self.m_menubar17 = wx.MenuBar( 0 )
-		self.tretrin_menu = wx.Menu()
-		self.t1_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 1", wx.EmptyString, wx.ITEM_NORMAL )
-		self.tretrin_menu.Append( self.t1_menuItem )
-
-		self.t2_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 2", wx.EmptyString, wx.ITEM_NORMAL )
-		self.tretrin_menu.Append( self.t2_menuItem )
-
-		self.t3_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 3", wx.EmptyString, wx.ITEM_NORMAL )
-		self.tretrin_menu.Append( self.t3_menuItem )
-
-		self.forside_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
-		self.tretrin_menu.Append( self.forside_menuItem )
-
-		self.m_menubar17.Append( self.tretrin_menu, u"Vælg funktion" )
-
-		self.SetMenuBar( self.m_menubar17 )
-
-
-		self.Centre( wx.BOTH )
-
-	def __del__( self ):
-		pass
-
-
-###########################################################################
-## Class Trin2Frame
-###########################################################################
-
-class Trin2Frame ( wx.Frame ):
-
-	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 741,462 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
-
-		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
-
-		bSizer26 = wx.BoxSizer( wx.VERTICAL )
-
-
-		bSizer26.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		self.Tretrin_Title = wx.StaticText( self, wx.ID_ANY, u"TRE-TRINS REGLEN", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.Tretrin_Title.Wrap( -1 )
-
-		self.Tretrin_Title.SetFont( wx.Font( 14, wx.FONTFAMILY_ROMAN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, True, "Times New Roman" ) )
-		self.Tretrin_Title.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNTEXT ) )
-		self.Tretrin_Title.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_APPWORKSPACE ) )
-
-		bSizer26.Add( self.Tretrin_Title, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		bSizer26.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		bSizer27 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.t2 = wx.StaticText( self, wx.ID_ANY, u"Trin 2:", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.t2.Wrap( -1 )
-
-		self.t2.SetFont( wx.Font( 9, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Arial" ) )
-
-		bSizer27.Add( self.t2, 0, wx.ALL, 5 )
-
-
-		bSizer27.Add( ( 50, 0), 0, wx.EXPAND, 5 )
-
-		self.m_staticText34 = wx.StaticText( self, wx.ID_ANY, u"Reducering af differenskvotienten", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText34.Wrap( -1 )
-
-		bSizer27.Add( self.m_staticText34, 0, wx.ALL, 5 )
-
-
-		bSizer26.Add( bSizer27, 0, wx.EXPAND, 5 )
-
-		bSizer28 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText35 = wx.StaticText( self, wx.ID_ANY, u"Første kvadratsætning:  ", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText35.Wrap( -1 )
-
-		self.m_staticText35.SetFont( wx.Font( 9, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, True, "Arial" ) )
-
-		bSizer28.Add( self.m_staticText35, 0, wx.ALL, 5 )
-
-
-		bSizer26.Add( bSizer28, 0, wx.EXPAND, 5 )
-
-		bSizer29 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText36 = wx.StaticText( self, wx.ID_ANY, u"(x_0^2 + delta x^2 + 2x_0 * delta x - x_0^2) / delta x   -->", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText36.Wrap( -1 )
-
-		bSizer29.Add( self.m_staticText36, 0, wx.ALL, 5 )
-
-
-		bSizer26.Add( bSizer29, 0, wx.EXPAND, 5 )
-
-		bSizer30 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText37 = wx.StaticText( self, wx.ID_ANY, u"(dela x^2 + 2x_0 * delta x) / delat x   -->", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText37.Wrap( -1 )
-
-		bSizer30.Add( self.m_staticText37, 0, wx.ALL, 5 )
-
-
-		bSizer26.Add( bSizer30, 0, wx.EXPAND, 5 )
-
-		bSizer31 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText38 = wx.StaticText( self, wx.ID_ANY, u"Fælles faktor udenfor parantes: ", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText38.Wrap( -1 )
-
-		self.m_staticText38.SetFont( wx.Font( 9, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL, True, "Arial" ) )
-
-		bSizer31.Add( self.m_staticText38, 0, wx.ALL, 5 )
-
-
-		bSizer26.Add( bSizer31, 0, wx.EXPAND, 5 )
-
-		bSizer32 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText40 = wx.StaticText( self, wx.ID_ANY, u"(dela x (delta x + 2x_0)) / delta x = delta x + 2x_0", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText40.Wrap( -1 )
-
-		bSizer32.Add( self.m_staticText40, 0, wx.ALL, 5 )
-
-
-		bSizer26.Add( bSizer32, 0, wx.EXPAND, 5 )
-
-
-		self.SetSizer( bSizer26 )
-		self.Layout()
-		self.m_menubar17 = wx.MenuBar( 0 )
-		self.tretrin_menu = wx.Menu()
-		self.t1_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 1", wx.EmptyString, wx.ITEM_NORMAL )
-		self.tretrin_menu.Append( self.t1_menuItem )
-
-		self.t2_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 2", wx.EmptyString, wx.ITEM_NORMAL )
-		self.tretrin_menu.Append( self.t2_menuItem )
-
-		self.t3_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 3", wx.EmptyString, wx.ITEM_NORMAL )
-		self.tretrin_menu.Append( self.t3_menuItem )
-
-		self.forside_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
-		self.tretrin_menu.Append( self.forside_menuItem )
-
-		self.m_menubar17.Append( self.tretrin_menu, u"Vælg funktion" )
-
-		self.SetMenuBar( self.m_menubar17 )
-
-
-		self.Centre( wx.BOTH )
-
-	def __del__( self ):
-		pass
-
-
-###########################################################################
-## Class Trin3Frame
-###########################################################################
-
-class Trin3Frame ( wx.Frame ):
-
-	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 741,462 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
-
-		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
-
-		bSizer33 = wx.BoxSizer( wx.VERTICAL )
-
-
-		bSizer33.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		self.Tretrin_Title = wx.StaticText( self, wx.ID_ANY, u"TRE-TRINS REGLEN", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.Tretrin_Title.Wrap( -1 )
-
-		self.Tretrin_Title.SetFont( wx.Font( 14, wx.FONTFAMILY_ROMAN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, True, "Times New Roman" ) )
-		self.Tretrin_Title.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNTEXT ) )
-		self.Tretrin_Title.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_APPWORKSPACE ) )
-
-		bSizer33.Add( self.Tretrin_Title, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		bSizer33.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		bSizer34 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText44 = wx.StaticText( self, wx.ID_ANY, u"Trin 3:", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText44.Wrap( -1 )
-
-		self.m_staticText44.SetFont( wx.Font( 9, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Arial" ) )
-
-		bSizer34.Add( self.m_staticText44, 0, wx.ALL, 5 )
-
-
-		bSizer34.Add( ( 50, 0), 0, wx.EXPAND, 5 )
-
-		self.m_staticText45 = wx.StaticText( self, wx.ID_ANY, u"Bestemmer differentialkvotienten", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText45.Wrap( -1 )
-
-		bSizer34.Add( self.m_staticText45, 0, wx.ALL, 5 )
-
-
-		bSizer33.Add( bSizer34, 0, wx.EXPAND, 5 )
-
-		bSizer37 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText47 = wx.StaticText( self, wx.ID_ANY, u"lim  delta x --> 0 (delta x + 2x_0) = 2x_0   Fordi delta x = 0", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText47.Wrap( -1 )
-
-		bSizer37.Add( self.m_staticText47, 0, wx.ALL|wx.EXPAND, 5 )
-
-
-		bSizer33.Add( bSizer37, 0, wx.EXPAND, 5 )
-
-		bSizer39 = wx.BoxSizer( wx.VERTICAL )
-
-
-		bSizer39.Add( ( 0, 20), 0, wx.EXPAND, 5 )
-
-		self.m_staticText58 = wx.StaticText( self, wx.ID_ANY, u"Afledende funktion: f'(x) = 2x", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText58.Wrap( -1 )
-
-		bSizer39.Add( self.m_staticText58, 0, wx.ALL, 5 )
-
-
-		bSizer33.Add( bSizer39, 0, wx.EXPAND, 5 )
-
-		bSizer391 = wx.BoxSizer( wx.VERTICAL )
-
-
-		bSizer391.Add( ( 0, 20), 0, wx.EXPAND, 5 )
-
-		self.m_staticText581 = wx.StaticText( self, wx.ID_ANY, u"Differentialkvotienten: f'(x) = 2x_0", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText581.Wrap( -1 )
-
-		bSizer391.Add( self.m_staticText581, 0, wx.ALL, 5 )
-
-
-		bSizer33.Add( bSizer391, 1, wx.EXPAND, 5 )
-
-
-		self.SetSizer( bSizer33 )
-		self.Layout()
-		self.m_menubar17 = wx.MenuBar( 0 )
-		self.tretrin_menu = wx.Menu()
-		self.t1_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 1", wx.EmptyString, wx.ITEM_NORMAL )
-		self.tretrin_menu.Append( self.t1_menuItem )
-
-		self.t2_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 2", wx.EmptyString, wx.ITEM_NORMAL )
-		self.tretrin_menu.Append( self.t2_menuItem )
-
-		self.t3_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Trin 3", wx.EmptyString, wx.ITEM_NORMAL )
-		self.tretrin_menu.Append( self.t3_menuItem )
-
-		self.forside_menuItem = wx.MenuItem( self.tretrin_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
-		self.tretrin_menu.Append( self.forside_menuItem )
-
-		self.m_menubar17.Append( self.tretrin_menu, u"Vælg funktion" )
-
-		self.SetMenuBar( self.m_menubar17 )
-
-
-		self.Centre( wx.BOTH )
-
-	def __del__( self ):
-		pass
+	def vis_tre_trin( self, event ):
+		event.Skip()
+
+	def vis_forside( self, event ):
+		event.Skip()
 
 
 ###########################################################################
@@ -851,83 +188,6 @@ class Trin3Frame ( wx.Frame ):
 ###########################################################################
 
 class IntFrame ( wx.Frame ):
-
-	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 741,517 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
-
-		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
-
-		vertical = wx.BoxSizer( wx.VERTICAL )
-
-
-		vertical.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		self.Inte_Title = wx.StaticText( self, wx.ID_ANY, u"INTEGRATIONSREGNING", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.Inte_Title.Wrap( -1 )
-
-		self.Inte_Title.SetFont( wx.Font( 14, wx.FONTFAMILY_ROMAN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, True, "Times New Roman" ) )
-		self.Inte_Title.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNTEXT ) )
-		self.Inte_Title.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_APPWORKSPACE ) )
-
-		vertical.Add( self.Inte_Title, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		vertical.Add( ( 0, 20), 0, wx.EXPAND, 5 )
-
-		bSizer21 = wx.BoxSizer( wx.VERTICAL )
-
-		self.m_staticText34 = wx.StaticText( self, wx.ID_ANY, u"Her kan du få afledt din funktion, få udregnet din funktion ved ", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText34.Wrap( -1 )
-
-		bSizer21.Add( self.m_staticText34, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-		self.m_staticText35 = wx.StaticText( self, wx.ID_ANY, u"hjælp af kædereglen og få beregnet integration ved substitution", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText35.Wrap( -1 )
-
-		bSizer21.Add( self.m_staticText35, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		bSizer21.Add( ( 0, 20), 0, wx.EXPAND, 5 )
-
-
-		vertical.Add( bSizer21, 0, wx.EXPAND, 5 )
-
-
-		self.SetSizer( vertical )
-		self.Layout()
-		self.m_menubar17 = wx.MenuBar( 0 )
-		self.int_menu = wx.Menu()
-		self.afledInt_menuItem = wx.MenuItem( self.int_menu, wx.ID_ANY, u"Afled din funktion", wx.EmptyString, wx.ITEM_NORMAL )
-		self.int_menu.Append( self.afledInt_menuItem )
-
-		self.kæde_menuItem = wx.MenuItem( self.int_menu, wx.ID_ANY, u"Kædereglen", wx.EmptyString, wx.ITEM_NORMAL )
-		self.int_menu.Append( self.kæde_menuItem )
-
-		self.subUb_menuItem = wx.MenuItem( self.int_menu, wx.ID_ANY, u"Integration ved subtitution (ubestemt integral)", wx.EmptyString, wx.ITEM_NORMAL )
-		self.int_menu.Append( self.subUb_menuItem )
-
-		self.subB_menuItem = wx.MenuItem( self.int_menu, wx.ID_ANY, u"Integration ved substitution (bestemt integral)", wx.EmptyString, wx.ITEM_NORMAL )
-		self.int_menu.Append( self.subB_menuItem )
-
-		self.forside_menuItem = wx.MenuItem( self.int_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
-		self.int_menu.Append( self.forside_menuItem )
-
-		self.m_menubar17.Append( self.int_menu, u"Vælg funktion" )
-
-		self.SetMenuBar( self.m_menubar17 )
-
-
-		self.Centre( wx.BOTH )
-
-	def __del__( self ):
-		pass
-
-
-###########################################################################
-## Class AfledIntFrame
-###########################################################################
-
-class AfledIntFrame ( wx.Frame ):
 
 	def __init__( self, parent ):
 		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 741,462 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
@@ -1007,396 +267,13 @@ class AfledIntFrame ( wx.Frame ):
 
 
 ###########################################################################
-## Class KædeFrame
-###########################################################################
-
-class KædeFrame ( wx.Frame ):
-
-	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 741,462 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
-
-		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
-
-		bSizer66 = wx.BoxSizer( wx.VERTICAL )
-
-		self.Kæde_Title = wx.StaticText( self, wx.ID_ANY, u"KÆDEREGLEN", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.Kæde_Title.Wrap( -1 )
-
-		self.Kæde_Title.SetFont( wx.Font( 14, wx.FONTFAMILY_ROMAN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, True, "Times New Roman" ) )
-		self.Kæde_Title.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNTEXT ) )
-		self.Kæde_Title.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_APPWORKSPACE ) )
-
-		bSizer66.Add( self.Kæde_Title, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		bSizer66.Add( ( 0, 20), 0, wx.EXPAND, 5 )
-
-		bSizer67 = wx.BoxSizer( wx.VERTICAL )
-
-		self.m_textCtrl17 = wx.TextCtrl( self, wx.ID_ANY, u"Indtast din funktion her", wx.DefaultPosition, wx.Size( 270,-1 ), 0 )
-		bSizer67.Add( self.m_textCtrl17, 0, wx.ALL, 5 )
-
-
-		bSizer67.Add( ( 0, 20), 0, wx.EXPAND, 5 )
-
-
-		bSizer66.Add( bSizer67, 0, wx.ALIGN_CENTER, 5 )
-
-		bSizer68 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText98 = wx.StaticText( self, wx.ID_ANY, u"f(t) =", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText98.Wrap( -1 )
-
-		bSizer68.Add( self.m_staticText98, 0, wx.ALL, 5 )
-
-		self.m_textCtrl18 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer68.Add( self.m_textCtrl18, 0, wx.ALL, 5 )
-
-
-		bSizer68.Add( ( 30, 0), 0, wx.EXPAND, 5 )
-
-		self.m_staticText99 = wx.StaticText( self, wx.ID_ANY, u"f'(t) =", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText99.Wrap( -1 )
-
-		bSizer68.Add( self.m_staticText99, 0, wx.ALL, 5 )
-
-		self.m_textCtrl19 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer68.Add( self.m_textCtrl19, 0, wx.ALL, 5 )
-
-
-		bSizer66.Add( bSizer68, 0, wx.ALIGN_CENTER, 5 )
-
-		bSizer681 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText981 = wx.StaticText( self, wx.ID_ANY, u"t(x) =", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText981.Wrap( -1 )
-
-		bSizer681.Add( self.m_staticText981, 0, wx.ALL, 5 )
-
-		self.m_textCtrl181 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer681.Add( self.m_textCtrl181, 0, wx.ALL, 5 )
-
-
-		bSizer681.Add( ( 30, 0), 0, wx.EXPAND, 5 )
-
-		self.m_staticText991 = wx.StaticText( self, wx.ID_ANY, u"t'(x) =", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText991.Wrap( -1 )
-
-		bSizer681.Add( self.m_staticText991, 0, wx.ALL, 5 )
-
-		self.m_textCtrl191 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer681.Add( self.m_textCtrl191, 0, wx.ALL, 5 )
-
-
-		bSizer66.Add( bSizer681, 0, wx.ALIGN_CENTER, 5 )
-
-		bSizer72 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText105 = wx.StaticText( self, wx.ID_ANY, u"h'(x) =", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText105.Wrap( -1 )
-
-		bSizer72.Add( self.m_staticText105, 0, wx.ALL, 5 )
-
-		self.m_textCtrl25 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
-		bSizer72.Add( self.m_textCtrl25, 0, wx.ALL, 5 )
-
-
-		bSizer66.Add( bSizer72, 0, wx.ALIGN_CENTER, 5 )
-
-		bSizer73 = wx.BoxSizer( wx.VERTICAL )
-
-
-		bSizer66.Add( bSizer73, 0, wx.EXPAND, 5 )
-
-
-		self.SetSizer( bSizer66 )
-		self.Layout()
-		self.m_menubar5 = wx.MenuBar( 0 )
-		self.kæde_menu = wx.Menu()
-		self.forside_menuItem = wx.MenuItem( self.kæde_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
-		self.kæde_menu.Append( self.forside_menuItem )
-
-		self.m_menubar5.Append( self.kæde_menu, u"Vælg funktion" )
-
-		self.SetMenuBar( self.m_menubar5 )
-
-
-		self.Centre( wx.BOTH )
-
-	def __del__( self ):
-		pass
-
-
-###########################################################################
-## Class SubUbFrame
-###########################################################################
-
-class SubUbFrame ( wx.Frame ):
-
-	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 741,478 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
-
-		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
-
-		bSizer79 = wx.BoxSizer( wx.VERTICAL )
-
-		self.SubUb_Title = wx.StaticText( self, wx.ID_ANY, u"INTEGRATION VED SUBSTITUTION", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.SubUb_Title.Wrap( -1 )
-
-		self.SubUb_Title.SetFont( wx.Font( 14, wx.FONTFAMILY_ROMAN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, True, "Times New Roman" ) )
-		self.SubUb_Title.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNTEXT ) )
-		self.SubUb_Title.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_APPWORKSPACE ) )
-
-		bSizer79.Add( self.SubUb_Title, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-		self.SubUb_Title1 = wx.StaticText( self, wx.ID_ANY, u"(UBESTEMT INTEGRAL)", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.SubUb_Title1.Wrap( -1 )
-
-		self.SubUb_Title1.SetFont( wx.Font( 14, wx.FONTFAMILY_ROMAN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, True, "Times New Roman" ) )
-		self.SubUb_Title1.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNTEXT ) )
-		self.SubUb_Title1.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_APPWORKSPACE ) )
-
-		bSizer79.Add( self.SubUb_Title1, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		bSizer79.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		bSizer67 = wx.BoxSizer( wx.VERTICAL )
-
-		self.m_textCtrl17 = wx.TextCtrl( self, wx.ID_ANY, u"Indtast din funktion her", wx.DefaultPosition, wx.Size( 270,-1 ), 0 )
-		bSizer67.Add( self.m_textCtrl17, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		bSizer67.Add( ( 0, 20), 0, wx.EXPAND, 5 )
-
-
-		bSizer79.Add( bSizer67, 0, wx.EXPAND, 5 )
-
-		bSizer68 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText98 = wx.StaticText( self, wx.ID_ANY, u"t =", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText98.Wrap( -1 )
-
-		bSizer68.Add( self.m_staticText98, 0, wx.ALL, 5 )
-
-		self.m_textCtrl18 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer68.Add( self.m_textCtrl18, 0, wx.ALL, 5 )
-
-
-		bSizer68.Add( ( 30, 0), 0, wx.EXPAND, 5 )
-
-		self.m_staticText99 = wx.StaticText( self, wx.ID_ANY, u"t' =", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText99.Wrap( -1 )
-
-		bSizer68.Add( self.m_staticText99, 0, wx.ALL, 5 )
-
-		self.m_textCtrl19 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer68.Add( self.m_textCtrl19, 0, wx.ALL, 5 )
-
-
-		bSizer79.Add( bSizer68, 0, wx.ALIGN_CENTER, 5 )
-
-		bSizer681 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText981 = wx.StaticText( self, wx.ID_ANY, u"dt/dx =", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText981.Wrap( -1 )
-
-		bSizer681.Add( self.m_staticText981, 0, wx.ALL, 5 )
-
-		self.m_textCtrl181 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
-		bSizer681.Add( self.m_textCtrl181, 0, wx.ALL, 5 )
-
-
-		bSizer79.Add( bSizer681, 0, wx.ALIGN_CENTER, 5 )
-
-		bSizer6811 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText9811 = wx.StaticText( self, wx.ID_ANY, u"Resultat =", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText9811.Wrap( -1 )
-
-		bSizer6811.Add( self.m_staticText9811, 0, wx.ALL, 5 )
-
-		self.m_textCtrl1811 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
-		bSizer6811.Add( self.m_textCtrl1811, 0, wx.ALL, 5 )
-
-
-		bSizer79.Add( bSizer6811, 0, wx.ALIGN_CENTER, 5 )
-
-		bSizer74 = wx.BoxSizer( wx.VERTICAL )
-
-
-		bSizer79.Add( bSizer74, 1, wx.EXPAND, 5 )
-
-
-		self.SetSizer( bSizer79 )
-		self.Layout()
-		self.m_menubar5 = wx.MenuBar( 0 )
-		self.subUb_menu = wx.Menu()
-		self.forside_menuItem = wx.MenuItem( self.subUb_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
-		self.subUb_menu.Append( self.forside_menuItem )
-
-		self.m_menubar5.Append( self.subUb_menu, u"Vælg funktion" )
-
-		self.SetMenuBar( self.m_menubar5 )
-
-
-		self.Centre( wx.BOTH )
-
-	def __del__( self ):
-		pass
-
-
-###########################################################################
-## Class SubBFrame
-###########################################################################
-
-class SubBFrame ( wx.Frame ):
-
-	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 741,538 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
-
-		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
-
-		bSizer79 = wx.BoxSizer( wx.VERTICAL )
-
-		self.SubB_Title = wx.StaticText( self, wx.ID_ANY, u"INTEGRATION VED SUBSTITUTION", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.SubB_Title.Wrap( -1 )
-
-		self.SubB_Title.SetFont( wx.Font( 14, wx.FONTFAMILY_ROMAN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, True, "Times New Roman" ) )
-		self.SubB_Title.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNTEXT ) )
-		self.SubB_Title.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_APPWORKSPACE ) )
-
-		bSizer79.Add( self.SubB_Title, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-		self.SubB_Title1 = wx.StaticText( self, wx.ID_ANY, u"(BESTEMT INTEGRAL)", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.SubB_Title1.Wrap( -1 )
-
-		self.SubB_Title1.SetFont( wx.Font( 14, wx.FONTFAMILY_ROMAN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, True, "Times New Roman" ) )
-		self.SubB_Title1.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_BTNTEXT ) )
-		self.SubB_Title1.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_APPWORKSPACE ) )
-
-		bSizer79.Add( self.SubB_Title1, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		bSizer79.Add( ( 0, 30), 0, wx.EXPAND, 5 )
-
-		bSizer67 = wx.BoxSizer( wx.VERTICAL )
-
-		self.m_textCtrl17 = wx.TextCtrl( self, wx.ID_ANY, u"Indtast din funktion her", wx.DefaultPosition, wx.Size( 270,-1 ), 0 )
-		bSizer67.Add( self.m_textCtrl17, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
-
-
-		bSizer67.Add( ( 0, 20), 0, wx.EXPAND, 5 )
-
-
-		bSizer79.Add( bSizer67, 0, wx.EXPAND, 5 )
-
-		bSizer682 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText982 = wx.StaticText( self, wx.ID_ANY, u"a =", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText982.Wrap( -1 )
-
-		bSizer682.Add( self.m_staticText982, 0, wx.ALL, 5 )
-
-		self.m_textCtrl182 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer682.Add( self.m_textCtrl182, 0, wx.ALL, 5 )
-
-
-		bSizer682.Add( ( 30, 0), 0, wx.EXPAND, 5 )
-
-		self.m_staticText991 = wx.StaticText( self, wx.ID_ANY, u"b =", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText991.Wrap( -1 )
-
-		bSizer682.Add( self.m_staticText991, 0, wx.ALL, 5 )
-
-		self.m_textCtrl191 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer682.Add( self.m_textCtrl191, 0, wx.ALL, 5 )
-
-
-		bSizer79.Add( bSizer682, 0, wx.ALIGN_CENTER, 5 )
-
-		bSizer68 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText98 = wx.StaticText( self, wx.ID_ANY, u"t =", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText98.Wrap( -1 )
-
-		bSizer68.Add( self.m_staticText98, 0, wx.ALL, 5 )
-
-		self.m_textCtrl18 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer68.Add( self.m_textCtrl18, 0, wx.ALL, 5 )
-
-
-		bSizer68.Add( ( 30, 0), 0, wx.EXPAND, 5 )
-
-		self.m_staticText99 = wx.StaticText( self, wx.ID_ANY, u"t' =", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText99.Wrap( -1 )
-
-		bSizer68.Add( self.m_staticText99, 0, wx.ALL, 5 )
-
-		self.m_textCtrl19 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer68.Add( self.m_textCtrl19, 0, wx.ALL, 5 )
-
-
-		bSizer79.Add( bSizer68, 0, wx.ALIGN_CENTER, 5 )
-
-		bSizer681 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText981 = wx.StaticText( self, wx.ID_ANY, u"dt/dx =", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText981.Wrap( -1 )
-
-		bSizer681.Add( self.m_staticText981, 0, wx.ALL, 5 )
-
-		self.m_textCtrl181 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
-		bSizer681.Add( self.m_textCtrl181, 0, wx.ALL, 5 )
-
-
-		bSizer79.Add( bSizer681, 0, wx.ALIGN_CENTER, 5 )
-
-		bSizer6811 = wx.BoxSizer( wx.HORIZONTAL )
-
-		self.m_staticText9811 = wx.StaticText( self, wx.ID_ANY, u"Resultat =", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText9811.Wrap( -1 )
-
-		bSizer6811.Add( self.m_staticText9811, 0, wx.ALL, 5 )
-
-		self.m_textCtrl1811 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 200,-1 ), 0 )
-		bSizer6811.Add( self.m_textCtrl1811, 0, wx.ALL, 5 )
-
-
-		bSizer79.Add( bSizer6811, 0, wx.ALIGN_CENTER, 5 )
-
-		bSizer74 = wx.BoxSizer( wx.VERTICAL )
-
-
-		bSizer79.Add( bSizer74, 1, wx.EXPAND, 5 )
-
-
-		self.SetSizer( bSizer79 )
-		self.Layout()
-		self.m_menubar5 = wx.MenuBar( 0 )
-		self.subB_menu = wx.Menu()
-		self.forside_menuItem = wx.MenuItem( self.subB_menu, wx.ID_ANY, u"Forside", wx.EmptyString, wx.ITEM_NORMAL )
-		self.subB_menu.Append( self.forside_menuItem )
-
-		self.m_menubar5.Append( self.subB_menu, u"Vælg funktion" )
-
-		self.SetMenuBar( self.m_menubar5 )
-
-
-		self.Centre( wx.BOTH )
-
-	def __del__( self ):
-		pass
-
-
-###########################################################################
 ## Class FejlFrame
 ###########################################################################
 
 class FejlFrame ( wx.Dialog ):
 
 	def __init__( self, parent ):
-		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE )
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 304,118 ), style = wx.DEFAULT_DIALOG_STYLE )
 
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 
@@ -1410,7 +287,7 @@ class FejlFrame ( wx.Dialog ):
 
 		bSizer62.Add( ( 0, 0), 1, wx.EXPAND, 5 )
 
-		self.m_staticText69 = wx.StaticText( self, wx.ID_ANY, u"Error 404", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText69 = wx.StaticText( self, wx.ID_ANY, u"Error 404 (Invalid Input)", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.m_staticText69.Wrap( -1 )
 
 		bSizer62.Add( self.m_staticText69, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
@@ -1430,19 +307,18 @@ class FejlFrame ( wx.Dialog ):
 
 		self.SetSizer( bSizer61 )
 		self.Layout()
-		bSizer61.Fit( self )
 
 		self.Centre( wx.BOTH )
 
 		# Connect Events
-		self.m_button2.Bind( wx.EVT_BUTTON, self.forside )
+		self.m_button2.Bind( wx.EVT_BUTTON, self.afslut )
 
 	def __del__( self ):
 		pass
 
 
 	# Virtual event handlers, overide them in your derived class
-	def forside( self, event ):
+	def afslut( self, event ):
 		event.Skip()
 
 
