@@ -145,9 +145,6 @@ class DiffFrame ( wx.Frame ):
 		self.m_button7 = wx.Button( self, wx.ID_ANY, u"Udregn", wx.DefaultPosition, wx.DefaultSize, 0 )
 		vertical.Add( self.m_button7, 0, wx.ALL, 5 )
 
-		self.m_button71 = wx.Button( self, wx.ID_ANY, u"3 Trins Reglen", wx.DefaultPosition, wx.DefaultSize, 0 )
-		vertical.Add( self.m_button71, 0, wx.ALL, 5 )
-
 
 		self.SetSizer( vertical )
 		self.Layout()
@@ -165,7 +162,6 @@ class DiffFrame ( wx.Frame ):
 
 		# Connect Events
 		self.m_button7.Bind( wx.EVT_BUTTON, self.udregn )
-		self.m_button71.Bind( wx.EVT_BUTTON, self.vis_tre_trin )
 		self.Bind( wx.EVT_MENU, self.vis_forside, id = self.forside_menuItem.GetId() )
 
 	def __del__( self ):
@@ -174,9 +170,6 @@ class DiffFrame ( wx.Frame ):
 
 	# Virtual event handlers, overide them in your derived class
 	def udregn( self, event ):
-		event.Skip()
-
-	def vis_tre_trin( self, event ):
 		event.Skip()
 
 	def vis_forside( self, event ):
@@ -239,6 +232,9 @@ class IntFrame ( wx.Frame ):
 		self.resultatInt = wx.ListBox( self, wx.ID_ANY, wx.DefaultPosition, wx.Size( 270,50 ), resultatIntChoices, 0 )
 		vertical.Add( self.resultatInt, 0, wx.ALL, 5 )
 
+		self.m_button4 = wx.Button( self, wx.ID_ANY, u"Udregn", wx.DefaultPosition, wx.DefaultSize, 0 )
+		vertical.Add( self.m_button4, 0, wx.ALL, 5 )
+
 
 		vertical1.Add( vertical, 0, wx.ALIGN_CENTER, 5 )
 
@@ -262,8 +258,20 @@ class IntFrame ( wx.Frame ):
 
 		self.Centre( wx.BOTH )
 
+		# Connect Events
+		self.m_button4.Bind( wx.EVT_BUTTON, self.udregn )
+		self.Bind( wx.EVT_MENU, self.afslut, id = self.forside_menuItem.GetId() )
+
 	def __del__( self ):
 		pass
+
+
+	# Virtual event handlers, overide them in your derived class
+	def udregn( self, event ):
+		event.Skip()
+
+	def afslut( self, event ):
+		event.Skip()
 
 
 ###########################################################################
