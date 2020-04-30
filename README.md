@@ -24,6 +24,11 @@ Logbog 24/4
 
   Mathias - Jeg fik lavet differentier methoden færdig
 
+Logbog 30/4
+  
+  Mathias - Jeg fik lavet integrationsdelen færdig, som i princippet burde 
+  færdigører programmet. Dog skal det stadig beta testes
+  
 Programmet:
   
   Vores program skal kunne løse nogle forskellige matematiske funktioner. 
