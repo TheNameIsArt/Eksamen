@@ -164,7 +164,7 @@ class IntFrame(GUI.IntFrame):
 
                 elif val[0][i][-1:] == "x": # Potens-led 2
                     if MainFrame.debug: print("Debug | Potens 2 : i = " + str(i) + ", x = " + str(x) + ", n = 0, Forskrift " + forskrift + ", Val[2]: " + str(val[2]))
-                    result += forskrift + "(" + x + "x)/2"
+                    result += forskrift + x + "/2x^2"
 
                 elif "^" in val[0][i] and val[0][i][1:] != "e" and val[0][i][:1] == "x": # Eksponent-led
                     n = int(val[2][i + 1])
