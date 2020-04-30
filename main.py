@@ -58,7 +58,7 @@ class DiffFrame(GUI.DiffFrame):
 
                 if val[0][i][:-1].isdigit() and val[0][i][-1:] == "x": # Førstegrads-led
                     result += forskrift + x
-                    if MainFrame.debug: print("Debug | Konstant    : i = " + str(i) + ", x = " + str(x) + ", n = " + str(n) + ", Forskrift " + forskrift + ", Val[2]: " + str(val[2]))
+                    if MainFrame.debug: print("Debug | Konstant    : i = " + str(i) + ", x = " + str(x) + ", n = " + ", Forskrift " + forskrift + ", Val[2]: " + str(val[2]))
 
                 elif val[0][i][:1] == "e" and val[0][i][-1:] == "x": # Euler-led
                     val[2].insert(0, "0")
@@ -96,8 +96,8 @@ class DiffFrame(GUI.DiffFrame):
 
             if result[:1] == "+":
                 result = result[1:]
-            result = "y=" + result
 
+            result = "y=" + result
             print("Resultat: " + result)
             self.result_indsæt.Append(result)
 
@@ -154,40 +154,44 @@ class IntFrame(GUI.IntFrame):
                 if val[0][i].isdigit(): # Konstant-led
                     x = val[0][i]
                     if MainFrame.debug: print("Debug | Konstant : i = " + str(i) + ", x = " + str(x) + ", n = 0, Forskrift " + forskrift + ", Val[2]: " + str(val[2]))
-                    result += x + "x"
+                    result += forskrift + x + "x"
 
-                if "^" in val[0][i] and val[0][i][:1] != "e" and val[0][i][:1] != "x": # Potens-led
+                elif "^" in val[0][i] and val[0][i][:1] != "e" and val[0][i][:1] != "x": # Potens-led 1
                     n = int(val[2][i + 1])
                     val[2].remove(str(n))
-                    if MainFrame.debug: print("Debug | Potens   : i = " + str(i) + ", x = " + str(x) + ", n = " + str(n) + ", Forskrift " + forskrift + ", Val[2]: " + str(val[2]))
+                    if MainFrame.debug: print("Debug | Potens 1 : i = " + str(i) + ", x = " + str(x) + ", n = " + str(n) + ", Forskrift " + forskrift + ", Val[2]: " + str(val[2]))
                     result += forskrift + "(" + str(x) + "x^" + str(n+1) + ")/" + str(n+1)
 
-                if "^" in val[0][i] and val[0][i][:1] != "e" and val[0][i][:1] == "x": # Eksponent-led
+                elif val[0][i][-1:] == "x": # Potens-led 2
+                    if MainFrame.debug: print("Debug | Potens 2 : i = " + str(i) + ", x = " + str(x) + ", n = 0, Forskrift " + forskrift + ", Val[2]: " + str(val[2]))
+                    result += forskrift + "(" + x + "x)/2"
+
+                elif "^" in val[0][i] and val[0][i][1:] != "e" and val[0][i][:1] == "x": # Eksponent-led
                     n = int(val[2][i + 1])
                     if MainFrame.debug: print("Debug | Eksponent: i = " + str(i) + ", x = " + str(x) + ", n = " + str(n) + ", Forskrift " + forskrift + ", Val[2]: " + str(val[2]))
                     result += forskrift + "(x^" + str(n + 1) + ")/" + str(n + 1)
 
-                if "sin" in val[0][i]: # Sinus
+                elif "sin" in val[0][i]: # Sinus
                     if MainFrame.debug: print("Debug | Sinus    : i = " + str(i) + ", x = " + str(x) + ", n = 0, Forskrift " + forskrift + ", Val[2]: " + str(val[2]))
                     result += "-cos(" + x + ")"
 
-                if "cos" in val[0][i]: # Cosinus
+                elif "cos" in val[0][i]: # Cosinus
                     if MainFrame.debug: print("Debug | Cosinus  : i = " + str(i) + ", x = " + str(x) + ", n = 0, Forskrift " + forskrift + ", Val[2]: " + str(val[2]))
                     result += forskrift + "sin(" + x + ")"
 
-                if "tan" in val[0][i]: # Tangent
+                elif "tan" in val[0][i]: # Tangent
                     if MainFrame.debug: print("Debug | Tangent  : i = " + str(i) + ", x = " + str(x) + ", n = 0, Forskrift " + forskrift + ", Val[2]: " + str(val[2]))
                     result += "-ln(cos(" + x + "))"
 
-                if val[0][i][:1] == "e": # Euler
+                elif val[0][i][:1] == "e": # Euler
                     if MainFrame.debug: print("Debug | Euler    : i = " + str(i) + ", x = " + str(x) + ", n = 0, Forskrift " + forskrift + ", Val[2]: " + str(val[2]))
                     result += forskrift + val[0][i]
 
-                if "ln" in val[0][i]: # Ln
+                elif "ln" in val[0][i]: # Ln
                     if MainFrame.debug: print("Debug | Ln       : i = " + str(i) + ", x = " + str(x) + ", n = 0, Forskrift " + forskrift + ", Val[2]: " + str(val[2]))
                     result += forskrift + str(x) + "(ln(" + str(x) + "))-" + str(x)
 
-                if "log" in val[0][i]: # Log
+                elif "log" in val[0][i]: # Log
                     if MainFrame.debug: print("Debug | Log      : i = " + str(i) + ", x = " + str(x) + ", n = 0, Forskrift " + forskrift + ", Val[2]: " + str(val[2]))
                     result += forskrift + str(x) + "(log(" + str(x) + "))-" + str(x) + "/ln(" + str(x) + ")"
 
