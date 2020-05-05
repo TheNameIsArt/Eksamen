@@ -26,6 +26,8 @@ Logbog 24/4
 
 Logbog 30/4
   
+  Anya - Synopsis
+  
   Mathias - Jeg fik lavet integrationsdelen færdig, som i princippet burde 
   færdigører programmet. Dog skal det stadig beta testes
   
