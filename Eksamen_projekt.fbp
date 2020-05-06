@@ -27,10 +27,10 @@
         <property name="ui_table">UI</property>
         <property name="use_enum">0</property>
         <property name="use_microsoft_bom">0</property>
-        <object class="Frame" expanded="0">
+        <object class="Frame" expanded="1">
             <property name="aui_managed">0</property>
             <property name="aui_manager_style">wxAUI_MGR_DEFAULT</property>
-            <property name="bg"></property>
+            <property name="bg">10,157,245</property>
             <property name="center">wxBOTH</property>
             <property name="context_help"></property>
             <property name="context_menu">1</property>
@@ -83,7 +83,7 @@
                         <property name="aui_position"></property>
                         <property name="aui_row"></property>
                         <property name="best_size"></property>
-                        <property name="bg">wxSYS_COLOUR_APPWORKSPACE</property>
+                        <property name="bg">10,157,245</property>
                         <property name="caption"></property>
                         <property name="caption_visible">1</property>
                         <property name="center_pane">0</property>
@@ -264,11 +264,11 @@
                 </object>
             </object>
             <object class="wxMenuBar" expanded="0">
-                <property name="bg"></property>
+                <property name="bg">wxSYS_COLOUR_MENU</property>
                 <property name="context_help"></property>
                 <property name="context_menu">1</property>
                 <property name="enabled">1</property>
-                <property name="fg"></property>
+                <property name="fg">wxSYS_COLOUR_MENU</property>
                 <property name="font"></property>
                 <property name="hidden">0</property>
                 <property name="id">wxID_ANY</property>
@@ -320,10 +320,10 @@
                 </object>
             </object>
         </object>
-        <object class="Frame" expanded="1">
+        <object class="Frame" expanded="0">
             <property name="aui_managed">0</property>
             <property name="aui_manager_style">wxAUI_MGR_DEFAULT</property>
-            <property name="bg"></property>
+            <property name="bg">10,157,245</property>
             <property name="center">wxBOTH</property>
             <property name="context_help"></property>
             <property name="context_menu">1</property>
@@ -347,7 +347,7 @@
             <property name="window_name"></property>
             <property name="window_style">wxTAB_TRAVERSAL</property>
             <property name="xrc_skip_sizer">1</property>
-            <object class="wxBoxSizer" expanded="1">
+            <object class="wxBoxSizer" expanded="0">
                 <property name="minimum_size"></property>
                 <property name="name">vertical</property>
                 <property name="orient">wxVERTICAL</property>
@@ -376,7 +376,7 @@
                         <property name="aui_position"></property>
                         <property name="aui_row"></property>
                         <property name="best_size"></property>
-                        <property name="bg">wxSYS_COLOUR_APPWORKSPACE</property>
+                        <property name="bg">10,157,245</property>
                         <property name="caption"></property>
                         <property name="caption_visible">1</property>
                         <property name="center_pane">0</property>
@@ -433,11 +433,11 @@
                         <property name="width">0</property>
                     </object>
                 </object>
-                <object class="sizeritem" expanded="1">
+                <object class="sizeritem" expanded="0">
                     <property name="border">5</property>
                     <property name="flag">wxALIGN_CENTER</property>
                     <property name="proportion">1</property>
-                    <object class="wxBoxSizer" expanded="1">
+                    <object class="wxBoxSizer" expanded="0">
                         <property name="minimum_size"></property>
                         <property name="name">bSizer71</property>
                         <property name="orient">wxHORIZONTAL</property>
@@ -465,7 +465,7 @@
                                         <property name="aui_position"></property>
                                         <property name="aui_row"></property>
                                         <property name="best_size"></property>
-                                        <property name="bg"></property>
+                                        <property name="bg">225,166,219</property>
                                         <property name="caption"></property>
                                         <property name="caption_visible">1</property>
                                         <property name="center_pane">0</property>
@@ -590,7 +590,7 @@
                                         <property name="aui_position"></property>
                                         <property name="aui_row"></property>
                                         <property name="best_size"></property>
-                                        <property name="bg"></property>
+                                        <property name="bg">wxSYS_COLOUR_WINDOW</property>
                                         <property name="caption"></property>
                                         <property name="caption_visible">1</property>
                                         <property name="center_pane">0</property>
@@ -653,7 +653,7 @@
                                         <property name="aui_position"></property>
                                         <property name="aui_row"></property>
                                         <property name="best_size"></property>
-                                        <property name="bg"></property>
+                                        <property name="bg">255,255,128</property>
                                         <property name="bitmap"></property>
                                         <property name="caption"></property>
                                         <property name="caption_visible">1</property>
@@ -760,10 +760,10 @@
                 </object>
             </object>
         </object>
-        <object class="Frame" expanded="1">
+        <object class="Frame" expanded="0">
             <property name="aui_managed">0</property>
             <property name="aui_manager_style">wxAUI_MGR_DEFAULT</property>
-            <property name="bg"></property>
+            <property name="bg">10,157,245</property>
             <property name="center">wxBOTH</property>
             <property name="context_help"></property>
             <property name="context_menu">1</property>
@@ -787,16 +787,16 @@
             <property name="window_name"></property>
             <property name="window_style">wxTAB_TRAVERSAL</property>
             <property name="xrc_skip_sizer">1</property>
-            <object class="wxBoxSizer" expanded="1">
+            <object class="wxBoxSizer" expanded="0">
                 <property name="minimum_size"></property>
                 <property name="name">vertical1</property>
                 <property name="orient">wxVERTICAL</property>
                 <property name="permission">none</property>
-                <object class="sizeritem" expanded="1">
+                <object class="sizeritem" expanded="0">
                     <property name="border">5</property>
                     <property name="flag">wxEXPAND</property>
                     <property name="proportion">0</property>
-                    <object class="spacer" expanded="1">
+                    <object class="spacer" expanded="0">
                         <property name="height">30</property>
                         <property name="permission">protected</property>
                         <property name="width">0</property>
@@ -816,7 +816,7 @@
                         <property name="aui_position"></property>
                         <property name="aui_row"></property>
                         <property name="best_size"></property>
-                        <property name="bg">wxSYS_COLOUR_APPWORKSPACE</property>
+                        <property name="bg">10,157,245</property>
                         <property name="caption"></property>
                         <property name="caption_visible">1</property>
                         <property name="center_pane">0</property>
@@ -873,22 +873,22 @@
                         <property name="width">0</property>
                     </object>
                 </object>
-                <object class="sizeritem" expanded="1">
+                <object class="sizeritem" expanded="0">
                     <property name="border">5</property>
                     <property name="flag">wxALIGN_CENTER</property>
                     <property name="proportion">0</property>
-                    <object class="wxBoxSizer" expanded="1">
+                    <object class="wxBoxSizer" expanded="0">
                         <property name="minimum_size"></property>
                         <property name="name">vertical2</property>
                         <property name="orient">wxVERTICAL</property>
                         <property name="permission">none</property>
                     </object>
                 </object>
-                <object class="sizeritem" expanded="1">
+                <object class="sizeritem" expanded="0">
                     <property name="border">5</property>
                     <property name="flag">wxALIGN_CENTER</property>
                     <property name="proportion">0</property>
-                    <object class="wxBoxSizer" expanded="1">
+                    <object class="wxBoxSizer" expanded="0">
                         <property name="minimum_size"></property>
                         <property name="name">vertical</property>
                         <property name="orient">wxVERTICAL</property>
@@ -907,7 +907,7 @@
                                 <property name="aui_position"></property>
                                 <property name="aui_row"></property>
                                 <property name="best_size"></property>
-                                <property name="bg"></property>
+                                <property name="bg">225,166,219</property>
                                 <property name="caption"></property>
                                 <property name="caption_visible">1</property>
                                 <property name="center_pane">0</property>
@@ -1091,11 +1091,11 @@
                                 <property name="window_style"></property>
                             </object>
                         </object>
-                        <object class="sizeritem" expanded="1">
+                        <object class="sizeritem" expanded="0">
                             <property name="border">5</property>
                             <property name="flag">wxALIGN_CENTER|wxALL</property>
                             <property name="proportion">0</property>
-                            <object class="wxButton" expanded="1">
+                            <object class="wxButton" expanded="0">
                                 <property name="BottomDockable">1</property>
                                 <property name="LeftDockable">1</property>
                                 <property name="RightDockable">1</property>
@@ -1105,7 +1105,7 @@
                                 <property name="aui_position"></property>
                                 <property name="aui_row"></property>
                                 <property name="best_size"></property>
-                                <property name="bg"></property>
+                                <property name="bg">255,255,128</property>
                                 <property name="bitmap"></property>
                                 <property name="caption"></property>
                                 <property name="caption_visible">1</property>
@@ -1178,7 +1178,7 @@
                     </object>
                 </object>
             </object>
-            <object class="wxMenuBar" expanded="1">
+            <object class="wxMenuBar" expanded="0">
                 <property name="bg"></property>
                 <property name="context_help"></property>
                 <property name="context_menu">1</property>
@@ -1200,7 +1200,7 @@
                 <property name="window_extra_style"></property>
                 <property name="window_name"></property>
                 <property name="window_style"></property>
-                <object class="wxMenu" expanded="1">
+                <object class="wxMenu" expanded="0">
                     <property name="label">Vælg funktion</property>
                     <property name="name">afledInt_menu</property>
                     <property name="permission">protected</property>
@@ -1224,7 +1224,7 @@
         <object class="Dialog" expanded="0">
             <property name="aui_managed">0</property>
             <property name="aui_manager_style">wxAUI_MGR_DEFAULT</property>
-            <property name="bg"></property>
+            <property name="bg">254,73,73</property>
             <property name="center">wxBOTH</property>
             <property name="context_help"></property>
             <property name="context_menu">1</property>
@@ -1239,7 +1239,7 @@
             <property name="minimum_size"></property>
             <property name="name">FejlFrame</property>
             <property name="pos"></property>
-            <property name="size">304,118</property>
+            <property name="size">304,133</property>
             <property name="style">wxDEFAULT_DIALOG_STYLE</property>
             <property name="subclass">; ; forward_declare</property>
             <property name="title"></property>
@@ -1356,7 +1356,7 @@
                                 <property name="aui_position"></property>
                                 <property name="aui_row"></property>
                                 <property name="best_size"></property>
-                                <property name="bg"></property>
+                                <property name="bg">255,255,128</property>
                                 <property name="bitmap"></property>
                                 <property name="caption"></property>
                                 <property name="caption_visible">1</property>
